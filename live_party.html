@@ -10,11 +10,11 @@
 :root{
   --bg:#0b0b0d;
   --bg-2:#131317;
-  --ink:#f4efe6;
-  --ink-dim:#a39b8c;
-  --gold:#c8a158;
-  --gold-soft:#e3c58a;
-  --line:rgba(200,161,88,.22);
+  --ink:#eee8dc;
+  --ink-dim:#928a7d;
+  --gold:#a89985;
+  --gold-soft:#e0d6c2;
+  --line:rgba(168,153,133,.22);
   --serif:"Cormorant Garamond","Shippori Mincho",serif;
   --jp:"Shippori Mincho",serif;
   --sans:"Noto Sans JP",sans-serif;
@@ -73,7 +73,7 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .hero::before{
   content:"";position:absolute;inset:0;
   background:url('https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo06.jpg') center/cover no-repeat;
-  filter:grayscale(.3) brightness(.45) contrast(1.05);
+  filter:grayscale(.6) brightness(.42) contrast(1.08);
   transform:scale(1.05);
   animation:heroZoom 18s ease-in-out infinite alternate;
 }
@@ -345,7 +345,7 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .corp::before{
   content:"CORPORATE";position:absolute;left:50%;top:40px;transform:translateX(-50%);
   font-family:var(--serif);font-style:italic;font-size:180px;font-weight:600;
-  color:transparent;-webkit-text-stroke:1px rgba(200,161,88,.08);
+  color:transparent;-webkit-text-stroke:1px rgba(168,153,133,.09);
   letter-spacing:.1em;pointer-events:none;white-space:nowrap;
 }
 .corp-wrap{max-width:1280px;margin:0 auto;position:relative;z-index:2}
@@ -431,7 +431,7 @@ a{color:inherit;text-decoration:none;transition:.4s}
   width:36px;height:36px;border:1px solid var(--line);background:transparent;color:var(--gold-soft);
   cursor:pointer;font-family:var(--serif);font-size:16px;transition:.3s;
 }
-.cal-nav button:hover{border-color:var(--gold);background:rgba(200,161,88,.08)}
+.cal-nav button:hover{border-color:var(--gold);background:rgba(168,153,133,.09)}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .cal-grid .dow{
   font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:.15em;
@@ -451,10 +451,10 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .cal-cell.closed{background:rgba(255,255,255,.02)}
 .cal-cell.closed .st{font-size:10px;color:var(--ink-dim);font-weight:400;letter-spacing:.1em}
 .cal-cell.avail{cursor:pointer}
-.cal-cell.avail:hover{border-color:var(--gold);background:rgba(200,161,88,.08);transform:scale(1.05)}
+.cal-cell.avail:hover{border-color:var(--gold);background:rgba(168,153,133,.09);transform:scale(1.05)}
 .cal-cell .st.ok{color:#7fb77a}
-.cal-cell .st.few{color:#e3c58a}
-.cal-cell .st.ask{color:#c89a58}
+.cal-cell .st.few{color:#cec3a8}
+.cal-cell .st.ask{color:#a18a6e}
 .cal-cell .st.full{color:#8f4b4b}
 .cal-cell.today{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
 .cal-legend{
@@ -464,8 +464,8 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .cal-legend span{display:inline-flex;align-items:center;gap:8px}
 .cal-legend b{font-size:16px;font-weight:700}
 .cal-legend b.ok{color:#7fb77a}
-.cal-legend b.few{color:#e3c58a}
-.cal-legend b.ask{color:#c89a58}
+.cal-legend b.few{color:#cec3a8}
+.cal-legend b.ask{color:#a18a6e}
 .cal-legend b.full{color:#8f4b4b}
 
 /* LINE side card */
@@ -607,7 +607,7 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .quote-meta .no{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:13px}
 .quote-total-band{
   display:flex;justify-content:space-between;align-items:center;gap:12px;
-  padding:18px 22px;background:rgba(200,161,88,.08);
+  padding:18px 22px;background:rgba(168,153,133,.09);
   border-left:3px solid var(--gold);margin-bottom:22px;
 }
 .quote-total-band .lb{font-size:11px;color:var(--ink-dim);letter-spacing:.25em}
@@ -734,7 +734,7 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .phone-big{
   max-width:560px;margin:40px auto 36px;
   padding:34px 44px;
-  border:1px solid var(--gold);background:rgba(200,161,88,.06);
+  border:1px solid var(--gold);background:rgba(168,153,133,.07);
   text-align:center;position:relative;
 }
 .phone-big::before,.phone-big::after{
