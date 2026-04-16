@@ -68,15 +68,15 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .site-header nav a.active::after{width:100%}
 .header-tel{
   display:inline-flex;align-items:center;gap:10px;
-  padding:10px 18px;border:1px solid var(--brass);
+  padding:10px 20px;
+  background:linear-gradient(135deg,#c69553 0%,#a06d33 100%);
+  color:#fff;white-space:nowrap;transition:.3s;
   font-family:var(--serif);font-weight:600;font-size:18px;letter-spacing:.04em;
-  color:var(--ink);white-space:nowrap;transition:.3s;background:#fff;
+  box-shadow:0 6px 18px -4px rgba(140,90,40,.45);
 }
-.header-tel:hover{background:var(--brass);color:#fff}
-.header-tel .ic{font-size:14px;color:var(--brass);transition:.3s}
-.header-tel:hover .ic{color:#fff}
-.header-tel small{font-size:9px;letter-spacing:.2em;font-family:var(--sans);font-weight:700;color:var(--ink-dim);margin-right:4px;transition:.3s}
-.header-tel:hover small{color:rgba(255,255,255,.8)}
+.header-tel:hover{background:linear-gradient(135deg,#d4a362 0%,#b07d43 100%);transform:translateY(-1px);box-shadow:0 10px 22px -4px rgba(140,90,40,.6)}
+.header-tel .ic{font-size:14px;color:#fff;transition:.3s}
+.header-tel small{font-size:9px;letter-spacing:.2em;font-family:var(--sans);font-weight:700;color:rgba(255,255,255,.85);margin-right:4px;transition:.3s}
 @media(max-width:1100px){
   .site-header nav ul{gap:22px}
   .site-header nav a{font-size:10px;letter-spacing:.2em}
@@ -670,31 +670,57 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .contact-dual{display:flex;flex-direction:column;gap:18px}
 
 .tel-card{
-  background:#fff;border:1px solid var(--brass);
-  padding:36px 30px;position:relative;overflow:hidden;
-  box-shadow:var(--shadow);
+  background:linear-gradient(165deg,#c69553 0%,#8c5d2b 100%);
+  padding:38px 30px;position:relative;overflow:hidden;
+  box-shadow:0 20px 50px -15px rgba(140,90,40,.5);
+  color:#fff;
 }
 .tel-card::before{
-  content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;
-  background:radial-gradient(circle,rgba(168,133,80,.08),transparent 70%);
+  content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;
+  background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);
+}
+.tel-card::after{
+  content:"RECOMMENDED";position:absolute;top:14px;right:16px;z-index:3;
+  font-family:var(--serif);font-style:italic;font-size:10px;letter-spacing:.3em;
+  color:#fff;padding:3px 8px;border:1px solid rgba(255,255,255,.55);
+  background:rgba(0,0,0,.12);
 }
 .tel-card .tel-icon{
-  width:56px;height:56px;border-radius:50%;border:1px solid var(--brass);
-  display:flex;align-items:center;justify-content:center;margin-bottom:20px;
-  font-size:22px;color:var(--brass);position:relative;z-index:2;
+  width:56px;height:56px;border-radius:14px;background:#fff;
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  font-size:26px;color:var(--brass-deep);
+  box-shadow:0 8px 20px rgba(0,0,0,.2);position:relative;z-index:2;
 }
+.tel-card .tel-icon::after{
+  content:"";position:absolute;inset:0;border-radius:14px;
+  border:2px solid #fff;opacity:.4;
+  animation:telRing 2s ease-out infinite;pointer-events:none;
+}
+@keyframes telRing{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.35);opacity:0}}
 .tel-card h4{
-  font-family:var(--jp);font-size:15px;font-weight:700;letter-spacing:.15em;
-  color:var(--ink);margin-bottom:6px;position:relative;z-index:2;
+  font-family:var(--jp);font-size:19px;font-weight:700;letter-spacing:.08em;
+  color:#fff;margin-bottom:4px;position:relative;z-index:2;line-height:1.5;
 }
+.tel-card h4 em{font-style:normal;background:rgba(0,0,0,.18);padding:2px 10px;border-radius:4px;font-size:.85em}
+.tel-card .tel-lead{font-size:12px;color:rgba(255,255,255,.9);letter-spacing:.08em;margin-bottom:14px;position:relative;z-index:2}
 .tel-card .tel-num{
-  display:block;
-  font-family:var(--serif);font-weight:600;font-size:34px;letter-spacing:.02em;
-  color:var(--ink);margin:4px 0 10px;position:relative;z-index:2;line-height:1.1;
-  transition:.3s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--serif);font-weight:700;font-size:34px;letter-spacing:.02em;
+  color:#fff;padding:18px;margin:4px 0 14px;position:relative;z-index:2;line-height:1.1;
+  background:#fff;color:var(--brass-deep);
+  box-shadow:0 10px 20px rgba(0,0,0,.15);transition:.3s;
 }
-.tel-card .tel-num:hover{color:var(--brass-deep)}
-.tel-card .tel-hours{font-size:11px;color:var(--ink-dim);letter-spacing:.1em;position:relative;z-index:2}
+.tel-card .tel-num::before{content:"☎";font-size:.75em;color:var(--brass-deep)}
+.tel-card .tel-num:hover{transform:translateY(-2px);box-shadow:0 16px 30px rgba(0,0,0,.25);color:#6d4a1a}
+.tel-card .tel-hours{font-size:11px;color:rgba(255,255,255,.85);letter-spacing:.1em;position:relative;z-index:2;text-align:center}
+.tel-card .tel-bullets{
+  list-style:none;padding:0;margin:16px 0 0;position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;
+}
+.tel-card .tel-bullets li{
+  font-size:11px;color:rgba(255,255,255,.92);letter-spacing:.04em;line-height:1.5;
+  padding:6px 8px;background:rgba(255,255,255,.1);border-left:2px solid rgba(255,255,255,.5);
+}
 
 .line-card{
   background:linear-gradient(165deg,#06c755 0%,#05a847 100%);
@@ -1047,22 +1073,25 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .float-tel{
   display:inline-flex;align-items:center;gap:12px;
   padding:14px 22px;
-  background:#fff;color:var(--ink);
+  background:linear-gradient(135deg,#c69553 0%,#8c5d2b 100%);
+  color:#fff;
   font-family:var(--jp);font-weight:700;font-size:14px;letter-spacing:.06em;
-  border-radius:50px;border:1px solid var(--brass);
-  box-shadow:0 14px 30px -10px rgba(76,56,24,.35);
-  transition:.3s;
+  border-radius:50px;
+  box-shadow:0 14px 34px -10px rgba(140,90,40,.6),0 0 0 1px rgba(255,255,255,.1);
+  transition:.3s;position:relative;
 }
-.float-tel:hover{transform:translateY(-3px);box-shadow:0 20px 40px -10px rgba(76,56,24,.5);background:var(--brass);color:#fff}
-.float-tel:hover .ic{background:#fff;color:var(--brass)}
-.float-tel:hover .txt small{color:rgba(255,255,255,.85)}
+.float-tel::after{
+  content:"";position:absolute;inset:0;border-radius:50px;
+  border:2px solid var(--brass);animation:floatPulse 2.4s ease-out infinite;pointer-events:none;
+}
+.float-tel:hover{transform:translateY(-3px);box-shadow:0 20px 50px -10px rgba(140,90,40,.8)}
 .float-tel .ic{
-  width:30px;height:30px;background:var(--brass);color:#fff;border-radius:50%;
+  width:30px;height:30px;background:#fff;color:var(--brass-deep);border-radius:50%;
   display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;
-  transition:.3s;
+  font-weight:700;
 }
 .float-tel .txt{display:flex;flex-direction:column;line-height:1.2;text-align:left}
-.float-tel .txt small{font-size:9px;letter-spacing:.15em;color:var(--ink-dim);font-weight:500;margin-bottom:2px;transition:.3s}
+.float-tel .txt small{font-size:9px;letter-spacing:.15em;opacity:.9;font-weight:500;margin-bottom:2px}
 .float-tel .txt b{font-family:var(--serif);font-weight:700;letter-spacing:.02em;font-size:15px}
 
 .float-line{
@@ -1218,21 +1247,21 @@ a{color:inherit;text-decoration:none;transition:.4s}
   .float-cta{
     left:0;right:0;bottom:0;top:auto;
     flex-direction:row;gap:0;padding:0;
-    background:#fff;border-top:1px solid var(--line);
-    box-shadow:0 -8px 20px rgba(76,56,24,.1);
+    border-top:1px solid rgba(0,0,0,.15);
+    box-shadow:0 -8px 20px rgba(0,0,0,.15);
     pointer-events:auto;
   }
   .float-cta > a{flex:1}
   .float-tel,.float-line{
-    border-radius:0;padding:14px 10px;
-    justify-content:center;box-shadow:none;border:none;
-    font-size:13px;gap:8px;
+    border-radius:0;padding:14px 8px;
+    justify-content:center;box-shadow:none;
+    font-size:13px;gap:8px;color:#fff;
   }
-  .float-tel{border-right:1px solid var(--line);background:#fff}
-  .float-line::after{display:none}
-  .float-tel .ic{width:26px;height:26px;font-size:12px}
+  .float-tel{border-right:2px solid rgba(255,255,255,.3)}
+  .float-tel::after,.float-line::after{display:none}
+  .float-tel .ic{width:26px;height:26px;font-size:12px;background:#fff;color:var(--brass-deep)}
   .float-line .ic{width:26px;height:26px;font-size:11px}
-  .float-tel .txt small,.float-line .txt small{font-size:8px}
+  .float-tel .txt small,.float-line .txt small{font-size:8px;opacity:.9}
   .float-tel .txt b{font-size:13px}
 }
 </style>
@@ -1696,9 +1725,16 @@ a{color:inherit;text-decoration:none;transition:.4s}
       <aside class="contact-dual">
         <div class="tel-card">
           <div class="tel-icon">☎</div>
-          <h4>お電話で、すぐに貸切相談。</h4>
+          <h4>お電話で、<em>その場で</em>仮予約。</h4>
+          <p class="tel-lead">日程・人数・ご要望を10分のヒアリングで確定。専門スタッフが直接お応えします。</p>
           <a href="tel:0222641084" class="tel-num">022-264-1084</a>
           <p class="tel-hours">受付 18:00–26:00／日曜 –25:00／年中無休</p>
+          <ul class="tel-bullets">
+            <li>即答で仮押さえOK</li>
+            <li>複雑な要望も相談可</li>
+            <li>急ぎの日程に強い</li>
+            <li>予算のすり合わせも</li>
+          </ul>
         </div>
         <div class="line-card">
           <div class="li-icon">LINE</div>
