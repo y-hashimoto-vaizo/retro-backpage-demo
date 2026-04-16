@@ -1319,6 +1319,121 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .lightbox .lb-close{background:var(--bg-2)!important;color:var(--brass-soft)!important}
 .lightbox .lb-close:hover{background:var(--brass)!important;color:#1a1410!important}
 .pc-note{background:var(--bg-2)!important;color:var(--ink-sub)}
+/* ========================================================
+   Tribute Enhancements — 2026-04-17
+   案A: hero font (Cormorant Garamond)
+   案B: contact section bg image
+   案3: hero slideshow / Scenes gallery / section title sizing
+   ======================================================== */
+
+/* 案A: Hero title font → Cormorant Garamond */
+.hero-estab{
+  font-family:"Cormorant Garamond","Jost",serif !important;
+  letter-spacing:.3em !important;
+  font-style:italic !important;
+  font-weight:400 !important;
+}
+.hero h1,.hero-title{
+  font-family:"Cormorant Garamond","Italiana",serif !important;
+  font-weight:500 !important;
+  font-style:normal !important;
+  letter-spacing:.02em !important;
+  text-shadow:2px 2px 14px rgba(0,0,0,.45);
+}
+.hero h1 .amp,.hero-title i{
+  font-family:"Cormorant Garamond",serif !important;
+  font-style:italic !important;
+  font-weight:500 !important;
+}
+.hero-jp,.hero .sub{
+  font-family:"Cormorant Garamond","Shippori Mincho",serif !important;
+  font-size:14px !important;
+  letter-spacing:.35em !important;
+  font-style:italic !important;
+}
+
+/* 案3: Hero 5-slide fade slideshow (JS injects .hero-slides) */
+.hero::before{display:none !important;}
+.hero-slides{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-slide{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:0;transition:opacity 2s ease;
+  filter:contrast(1.04) saturate(.82) brightness(.52);
+  transform:scale(1.03);
+  animation:heroDrift 28s ease-in-out infinite alternate;
+}
+.hero-slide.is-active{opacity:1}
+
+/* 案3: Section title font sizing (refined, editorial) */
+.sec-head .en{
+  font-size:clamp(34px,4.2vw,56px) !important;
+  font-weight:500 !important;
+  letter-spacing:.04em !important;
+  font-family:"Cormorant Garamond","EB Garamond",serif !important;
+}
+.sec-head .en i{font-style:italic !important;font-weight:500 !important;}
+
+/* 案3: Scenes gallery — centered header + 4-col square grid */
+.gallery .sec-head{
+  display:block !important;
+  text-align:center !important;
+  max-width:none !important;
+  margin:0 auto 50px !important;
+}
+.gallery .sec-head::before{
+  content:"— GALLERY —";display:block;
+  font-family:"Cormorant Garamond","EB Garamond",serif;
+  font-size:13px;letter-spacing:.3em;color:var(--ink-dim);
+  margin-bottom:12px;text-transform:uppercase;
+}
+.gallery .sec-head .en{
+  font-size:clamp(36px,4vw,48px) !important;
+  letter-spacing:.04em !important;
+  color:var(--ink) !important;
+  text-transform:none !important;
+}
+.gallery .sec-head .en i{display:none !important;}
+.gallery .sec-head .meta{max-width:none !important;margin:14px auto 0 !important;text-align:center !important;}
+.gallery .sec-head .meta .jp{font-size:14px !important;}
+.gallery .sec-head .meta::before{
+  content:"";display:block;width:40px;height:1px;
+  background:var(--brass);margin:18px auto 20px;opacity:.75;
+}
+/* Scenes — 4-col aspect-ratio:1 grid with 8px gap */
+.gallery-grid{
+  grid-template-columns:repeat(4,1fr) !important;
+  grid-auto-rows:unset !important;
+  gap:8px !important;
+}
+.gallery-grid .gi{
+  grid-column:span 1 !important;
+  grid-row:span 1 !important;
+  aspect-ratio:1 !important;
+}
+.gallery-grid .gi.wide,.gallery-grid .gi.tall{grid-column:span 1 !important;grid-row:span 1 !important;aspect-ratio:1 !important;}
+@media(max-width:896px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr) !important;}
+}
+
+/* 案B: Contact / booking section background image */
+.info{
+  position:relative;
+  padding-top:110px !important;padding-bottom:110px !important;
+  overflow:hidden;
+}
+.info::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:url('https://onorikuto7978-sys.github.io/retro-backpage-site/images/retro/retro-about-heading.png') center/cover no-repeat;
+  filter:contrast(1.02) saturate(.88);
+  opacity:.28;
+}
+.info::after{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.38) 100%);
+}
+.info > *{position:relative;z-index:1;}
+
 </style>
 </head>
 <body>
@@ -2039,5 +2154,38 @@ a{color:inherit;text-decoration:none;transition:.4s}
   });
 })();
 </script>
+
+<script>
+// Tribute: hero 5-slide fade slideshow (inspired by 案3 v2)
+document.addEventListener('DOMContentLoaded', function(){
+  var hero = document.querySelector('.hero');
+  if (!hero) return;
+  var slides = [
+    'https://retro-backpage.com/wp/wp-content/themes/backpage/img/index/mv_img01.jpg',
+    'https://retro-backpage.com/wp/wp-content/themes/backpage/img/index/mv_img02.jpg',
+    'https://retro-backpage.com/wp/wp-content/themes/backpage/img/index/retro_antique_photo01.jpg',
+    'https://retro-backpage.com/wp/wp-content/themes/backpage/img/index/food_drink_photo01.jpg',
+    'https://retro-backpage.com/wp/wp-content/themes/backpage/img/index/live_party_photo01.jpg'
+  ];
+  var wrap = document.createElement('div');
+  wrap.className = 'hero-slides';
+  wrap.setAttribute('aria-hidden','true');
+  slides.forEach(function(url, idx){
+    var s = document.createElement('div');
+    s.className = 'hero-slide' + (idx===0?' is-active':'');
+    s.style.backgroundImage = "url('" + url + "')";
+    wrap.appendChild(s);
+  });
+  hero.insertBefore(wrap, hero.firstChild);
+  var i = 0;
+  var nodes = wrap.children;
+  setInterval(function(){
+    nodes[i].classList.remove('is-active');
+    i = (i+1) % nodes.length;
+    nodes[i].classList.add('is-active');
+  }, 5500);
+});
+</script>
+
 </body>
 </html>
