@@ -1527,6 +1527,39 @@ a{color:inherit;text-decoration:none;transition:.4s}
 /* Text labels in estimator */
 .estimator .label{color:var(--brass-soft) !important;}
 
+
+
+/* ===== CONTRAST FIX v2 (DARK VARIANTS) — 2026-04-17 ===== */
+/* Feature list items, gallery captions, flow circles, icons */
+.party-features li,
+ul.party-features > li,
+.party-features > li{
+  background:var(--bg-3) !important;
+  color:var(--ink) !important;
+  border-color:var(--line-soft) !important;
+}
+.party-features li .num,
+.party-features li span.num{color:var(--brass-soft) !important;}
+.party-features li .tt{color:var(--ink) !important;}
+.party-features li .ds{color:var(--ink-sub) !important;}
+
+/* Gallery items — remove white bg so only images show */
+figure.gi,.gallery-grid figure.gi{background:var(--bg-2) !important;}
+.gi-cat{background:rgba(26,20,16,.85) !important;color:var(--brass-soft) !important;}
+figure.gi figcaption{color:var(--ink) !important;}
+
+/* Flow step circle */
+.flow-step .circle,.flow-step div.circle{
+  background:var(--brass) !important;color:var(--bg) !important;border:none !important;
+}
+
+/* Card icons — brass bg + dark glyph */
+.tel-icon,.li-icon,.tel-card .tel-icon,.line-card .li-icon{
+  background:var(--brass) !important;color:var(--bg) !important;
+}
+.line-btn .plus{background:var(--bg) !important;color:#06c755 !important;}
+.float-tel .ic,.float-line .ic{background:var(--brass) !important;color:var(--bg) !important;}
+
 </style>
 </head>
 <body>
