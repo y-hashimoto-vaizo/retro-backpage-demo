@@ -1414,6 +1414,32 @@ a{color:inherit;text-decoration:none;transition:.4s}
 }
 .info > *{position:relative;z-index:1;}
 
+
+
+/* ===== CONTRAST FIX (01 ELEGANT WHITE) — 2026-04-17 ===== */
+:root{
+  --brass:#8a6530 !important;      /* was #b28a4b — deeper gold for text/accents */
+  --brass-soft:#a67e45 !important; /* unified midtone */
+  --brass-deep:#5e4420 !important; /* deep enough for white text bg */
+  --ink-dim:#5a4830 !important;    /* was #8a7b67 — now meets 7:1 on white */
+  --line:rgba(90,72,48,.35) !important;
+  --line-soft:rgba(90,72,48,.18) !important;
+}
+/* Buttons with brass bg + white text — use deep bg */
+.gf.active,.est-btn,.plan-btn:hover,.pc-step button:hover:not(:disabled),.pill input:checked + span,
+.btn.primary,.plan.featured .plan-btn{
+  background:var(--brass-deep) !important;color:#fff !important;border-color:var(--brass-deep) !important;
+}
+.plan-badge,.plan.featured .plan-badge{background:var(--brass-deep) !important;color:#fff !important;border-color:var(--brass-deep) !important;}
+/* Status colors — darker green/orange for calendar */
+.cal-cell .st.ok,.cal-legend .ok{color:#2f7a2b !important;}
+.cal-cell .st.few,.cal-legend .few{color:#8a5a10 !important;}
+.cal-cell .st.ask,.cal-legend .ask{color:#7a3030 !important;}
+.cal-cell .st.full,.cal-legend .full{color:#a0402a !important;}
+/* Small accent texts — use darker */
+.unit,.pc-caption,.cal-legend span,.footer-bottom,.footer-copy{color:var(--ink-sub) !important;}
+.gi-cat{color:var(--brass-deep) !important;}
+
 </style>
 </head>
 <body>

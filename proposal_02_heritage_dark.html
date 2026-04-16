@@ -1436,6 +1436,97 @@ a{color:inherit;text-decoration:none;transition:.4s}
 }
 .info > *{position:relative;z-index:1;}
 
+
+
+/* ===== CONTRAST FIX (DARK VARIANTS) — 2026-04-17 ===== */
+/* Residual white cards → dark bg so inner cream text is readable */
+.estimator,.cal-box,.phone-big,.tel-num,.line-btn,.info-card,
+.info .btn,.info a.btn,.site-footer,.pc-caption,.reservation-wrap,
+.estimator-grid,.simulator-wrap,.cal-legend,
+.footer-grid,.footer-bottom,.info .phone-big,
+.plan.featured,.plan,.plan-body,.plan-media,
+.tel-card{
+  background:var(--bg-2) !important;
+  color:var(--ink) !important;
+}
+.estimator,.cal-box,.tel-card,.line-card,.info-card,.plan,.phone-big{
+  border-color:var(--line) !important;
+}
+.estimator *:not(button):not(input):not(a):not(.est-btn):not(.pill span):not(.on),
+.cal-box *:not(.cal-cell):not(.st):not(b){
+  color:inherit;
+}
+.estimator h2,.estimator h3,.estimator label,.estimator p,.estimator span:not(.on),
+.cal-box h3,.cal-box p,.cal-box caption,
+.phone-big *,.tel-card *:not(a):not(.tel-num),.line-card *:not(a):not(.line-btn){
+  color:var(--ink) !important;
+}
+.estimator .sub,.estimator .pc-caption,.cal-box p,.cal-legend span,
+.phone-big .plabel,.phone-big .hours,
+.tel-card .tel-hours,.tel-card .tel-lead,
+.footer-bottom,.footer-copy{color:var(--ink-sub) !important;}
+.estimator b,.cal-box b,.tel-card b{color:var(--brass-soft) !important;}
+
+/* Phone & LINE buttons — solid brass */
+.tel-num{
+  background:var(--brass) !important;color:var(--bg) !important;
+  border:1px solid var(--brass) !important;
+}
+.tel-num:hover{background:var(--brass-soft) !important;}
+.line-btn{
+  background:#06c755 !important;color:#fff !important;border-color:#06c755 !important;
+}
+.line-btn:hover{background:#08a04a !important;}
+.line-btn .plus{background:#fff;color:#06c755}
+
+/* Reservation / Booking section (.info) */
+.info .btn{
+  background:transparent !important;
+  color:var(--ink) !important;
+  border:1px solid var(--brass) !important;
+}
+.info .btn.primary{
+  background:var(--brass) !important;color:var(--bg) !important;border-color:var(--brass) !important;
+}
+.info .btn:hover{background:var(--brass) !important;color:var(--bg) !important;}
+.info .phone-big{
+  background:var(--bg-3) !important;border:1px solid var(--line) !important;
+}
+.info .phone-big .num{color:var(--ink) !important;}
+.info .label{color:var(--brass-soft) !important;}
+.info h3,.info i{color:var(--ink) !important;}
+.info p{color:var(--ink-sub) !important;}
+
+/* Footer */
+.site-footer{
+  background:#0a0704 !important;color:var(--ink-sub) !important;
+  border-top:1px solid var(--line-soft) !important;
+}
+.site-footer *{color:var(--ink-sub) !important;}
+.site-footer .logo,.site-footer h5,.site-footer .brand .logo,
+.site-footer a:hover{color:var(--brass-soft) !important;}
+
+/* Plan badges — use bg contrast */
+.plan-badge{background:var(--brass) !important;color:var(--bg) !important;}
+.plan-ribbon{background:var(--brass) !important;color:var(--bg) !important;}
+
+/* Simulator output / estimate card */
+.est-out,.est-summary,.estimator-output,.pc-note{
+  background:var(--bg-3) !important;color:var(--ink) !important;border-color:var(--line) !important;
+}
+
+/* Calendar cells in dark */
+.cal-cell{color:var(--ink) !important;border-color:var(--line-soft) !important;}
+.cal-cell.closed{color:var(--ink-dim) !important;}
+.cal-cell.past{opacity:.35;}
+.cal-cell .st.ok,.cal-legend .ok{color:#7fc077 !important;}
+.cal-cell .st.few,.cal-legend .few{color:var(--brass-soft) !important;}
+.cal-cell .st.ask,.cal-legend .ask{color:#e0a070 !important;}
+.cal-cell .st.full,.cal-legend .full{color:#e06a5a !important;}
+
+/* Text labels in estimator */
+.estimator .label{color:var(--brass-soft) !important;}
+
 </style>
 </head>
 <body>
