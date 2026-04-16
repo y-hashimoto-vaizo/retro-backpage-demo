@@ -310,39 +310,233 @@ a{color:inherit;text-decoration:none;transition:.4s}
 /* ===== Plans ===== */
 .plans{background:var(--bg)}
 .plans-grid{
-  max-width:1280px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:26px;
+  max-width:1280px;margin:56px auto 0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  align-items:stretch;
 }
 .plan{
-  position:relative;padding:46px 34px 40px;
-  border:1px solid var(--line);background:var(--bg-2);
+  position:relative;
+  display:flex;flex-direction:column;
+  border:1px solid var(--line);background:#fff;
   transition:.5s;overflow:hidden;
 }
-.plan::before{
-  content:"";position:absolute;top:0;left:0;width:100%;height:2px;
-  background:linear-gradient(90deg,transparent,var(--brass),transparent);
-  transform:translateX(-100%);transition:.8s;
-}
 .plan:hover{transform:translateY(-6px);border-color:var(--brass);box-shadow:var(--shadow)}
-.plan:hover::before{transform:translateX(100%)}
-.plan .ic{
-  font-family:var(--serif);font-style:italic;font-size:14px;color:var(--brass);
-  letter-spacing:.3em;margin-bottom:16px;
+
+.plan-media{
+  position:relative;height:180px;overflow:hidden;
 }
-.plan h4{
-  font-family:var(--jp);font-weight:700;font-size:22px;letter-spacing:.1em;
-  margin-bottom:12px;color:var(--ink);
+.plan-media img{
+  width:100%;height:100%;object-fit:cover;
+  transition:1.2s cubic-bezier(.2,.8,.2,1);
+  filter:saturate(.9) brightness(.85);
 }
-.plan .en-name{
-  font-family:var(--serif);font-size:14px;color:var(--ink-dim);
-  font-style:italic;margin-bottom:22px;padding-bottom:22px;
-  border-bottom:1px solid var(--line);
+.plan:hover .plan-media img{transform:scale(1.08);filter:saturate(1) brightness(1)}
+.plan-media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.55));
 }
-.plan p{font-size:14px;color:var(--ink-sub);line-height:2;margin-bottom:24px}
-.plan dl{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:13px}
-.plan dt{color:var(--brass);font-family:var(--serif);font-style:italic;letter-spacing:.1em}
-.plan dd{color:var(--ink)}
-@media(max-width:896px){.plans-grid{grid-template-columns:1fr;gap:18px}.plan{padding:38px 26px}}
+.plan-badge{
+  position:absolute;top:16px;left:16px;z-index:2;
+  font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:.28em;
+  padding:5px 12px;background:rgba(255,253,248,.95);color:var(--brass-deep);
+  border:1px solid var(--brass);
+}
+.plan-en-top{
+  position:absolute;left:22px;bottom:18px;z-index:2;
+  font-family:var(--serif);font-style:italic;font-size:20px;
+  letter-spacing:.12em;color:#fff;line-height:1.1;
+}
+
+.plan-body{
+  padding:36px 30px 32px;display:flex;flex-direction:column;flex:1;
+}
+.plan-title{
+  font-family:var(--jp);font-weight:700;font-size:22px;letter-spacing:.08em;
+  margin-bottom:18px;color:var(--ink);
+}
+.plan-price{
+  display:flex;align-items:baseline;gap:4px;
+  padding:18px 0 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  margin-bottom:22px;
+}
+.plan-price .yen{
+  font-family:var(--serif);font-size:26px;color:var(--brass-deep);font-weight:600;
+}
+.plan-price .num{
+  font-family:var(--serif);font-weight:600;font-size:56px;line-height:1;
+  letter-spacing:.01em;color:var(--ink);
+}
+.plan-price .unit{
+  font-family:var(--jp);font-size:13px;color:var(--ink-dim);letter-spacing:.1em;margin-left:8px;
+}
+
+.plan-meta{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:22px;
+  text-align:center;
+}
+.plan-meta > div{
+  padding:10px 4px;background:var(--bg-2);border:1px solid var(--line-soft);
+}
+.plan-meta b{
+  display:block;font-family:var(--serif);font-size:20px;font-weight:600;color:var(--brass-deep);
+  line-height:1.1;margin-bottom:2px;
+}
+.plan-meta span{font-size:10px;letter-spacing:.15em;color:var(--ink-dim)}
+
+.plan-includes{
+  list-style:none;padding:0;margin:0 0 26px;flex:1;
+}
+.plan-includes li{
+  position:relative;padding:9px 0 9px 26px;font-size:13px;color:var(--ink-sub);
+  border-bottom:1px dashed var(--line-soft);line-height:1.6;
+}
+.plan-includes li:last-child{border-bottom:none}
+.plan-includes li::before{
+  content:"";position:absolute;left:4px;top:14px;
+  width:10px;height:6px;border-left:1.5px solid var(--brass);border-bottom:1.5px solid var(--brass);
+  transform:rotate(-45deg);
+}
+
+.plan-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px;border:1px solid var(--brass);color:var(--brass-deep);background:#fff;
+  font-family:var(--jp);font-size:13px;font-weight:700;letter-spacing:.15em;
+  transition:.3s;text-align:center;
+}
+.plan-btn:hover{background:var(--brass);color:#fff}
+.plan-btn .arr{font-family:var(--sans);font-size:12px;transition:.3s}
+.plan-btn:hover .arr{transform:translateX(4px)}
+
+/* Featured (Premium) plan */
+.plan.featured{
+  border:2px solid var(--brass);
+  background:linear-gradient(180deg,#fffbf3 0%,#fff 100%);
+  transform:translateY(-20px);
+  box-shadow:0 30px 60px -24px rgba(140,109,61,.3);
+}
+.plan.featured:hover{transform:translateY(-26px)}
+.plan-ribbon{
+  position:absolute;top:0;left:0;right:0;z-index:3;
+  padding:10px;background:var(--brass);color:#fff;text-align:center;
+  font-family:var(--serif);font-style:italic;font-size:13px;letter-spacing:.4em;font-weight:600;
+}
+.plan.featured .plan-media{margin-top:38px}
+.plan.featured .plan-badge{background:var(--brass);color:#fff;border-color:var(--brass)}
+.plan.featured .plan-btn{background:var(--brass);color:#fff}
+.plan.featured .plan-btn:hover{background:var(--brass-deep)}
+
+@media(max-width:896px){
+  .plans-grid{grid-template-columns:1fr;gap:20px;margin-top:36px}
+  .plan.featured{transform:none}
+  .plan.featured:hover{transform:translateY(-6px)}
+  .plan-media{height:160px}
+  .plan.featured .plan-media{margin-top:36px}
+  .plan-body{padding:30px 24px 28px}
+  .plan-price .num{font-size:48px}
+}
+
+/* ===== Gallery ===== */
+.gallery{background:var(--bg-2);position:relative;overflow:hidden}
+.gallery::before{
+  content:"GALLERY";position:absolute;right:-20px;top:50px;
+  font-family:var(--serif);font-style:italic;font-size:170px;font-weight:500;
+  color:transparent;-webkit-text-stroke:1px rgba(168,133,80,.1);
+  letter-spacing:.08em;pointer-events:none;white-space:nowrap;
+}
+.gallery-wrap{max-width:1280px;margin:0 auto;position:relative;z-index:2}
+.gallery-filters{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:40px;
+}
+.gf{
+  padding:9px 22px;background:#fff;border:1px solid var(--line);cursor:pointer;
+  font-family:var(--serif);font-style:italic;font-size:13px;letter-spacing:.2em;
+  color:var(--ink-sub);transition:.3s;
+}
+.gf:hover{border-color:var(--brass);color:var(--brass-deep)}
+.gf.active{background:var(--brass);color:#fff;border-color:var(--brass)}
+
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:180px;gap:14px;
+}
+.gi{
+  position:relative;overflow:hidden;cursor:pointer;
+  border:1px solid var(--line);background:#fff;
+  transition:.5s;
+}
+.gi img{
+  width:100%;height:100%;object-fit:cover;
+  transition:1s cubic-bezier(.2,.8,.2,1);
+  filter:saturate(.9);
+}
+.gi:hover img{transform:scale(1.08);filter:saturate(1)}
+.gi::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 50%,rgba(42,34,24,.7));
+  opacity:0;transition:.4s;
+}
+.gi:hover::after{opacity:1}
+.gi figcaption{
+  position:absolute;left:16px;bottom:14px;right:16px;z-index:2;
+  font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:.2em;
+  color:#fff;opacity:0;transform:translateY(8px);transition:.4s;
+}
+.gi:hover figcaption{opacity:1;transform:translateY(0)}
+.gi .gi-cat{
+  position:absolute;top:12px;left:12px;z-index:2;
+  font-family:var(--serif);font-style:italic;font-size:10px;letter-spacing:.25em;
+  padding:3px 10px;background:rgba(255,253,248,.92);color:var(--brass-deep);
+  border:1px solid var(--brass);
+}
+.gi.hide{display:none}
+.gi.tall{grid-row:span 2}
+.gi.wide{grid-column:span 2}
+@media(max-width:896px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:140px;gap:8px}
+  .gi.wide{grid-column:span 2}
+  .gi.tall{grid-row:span 2}
+  .gallery::before{font-size:90px;top:30px}
+}
+
+/* Lightbox */
+.lightbox{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(20,15,8,.92);
+  display:none;align-items:center;justify-content:center;padding:40px;
+  backdrop-filter:blur(8px);
+}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:82vh;object-fit:contain;border:1px solid var(--brass);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.lightbox .lb-close{
+  position:absolute;top:24px;right:28px;
+  width:44px;height:44px;border-radius:50%;
+  background:#fff;border:1px solid var(--brass);cursor:pointer;
+  font-family:var(--serif);font-size:22px;color:var(--ink);
+  transition:.3s;
+}
+.lightbox .lb-close:hover{background:var(--brass);color:#fff}
+.lightbox .lb-caption{
+  position:absolute;left:0;right:0;bottom:30px;text-align:center;
+  font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:.25em;
+  color:#eee8dc;
+}
+.lightbox .lb-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.4);
+  color:#fff;font-family:var(--serif);font-size:22px;cursor:pointer;
+  transition:.3s;
+}
+.lightbox .lb-nav:hover{background:var(--brass);border-color:var(--brass)}
+.lightbox .lb-prev{left:30px}
+.lightbox .lb-next{right:30px}
+@media(max-width:640px){
+  .lightbox{padding:20px}
+  .lightbox .lb-close{top:14px;right:14px;width:38px;height:38px;font-size:18px}
+  .lightbox .lb-nav{width:40px;height:40px;font-size:18px}
+  .lightbox .lb-prev{left:10px}.lightbox .lb-next{right:10px}
+  .lightbox .lb-caption{font-size:12px;bottom:14px}
+}
 
 /* ===== Corporate Charter ===== */
 .corp{background:var(--bg-2);position:relative;overflow:hidden}
@@ -569,17 +763,91 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .est-form .field > label strong{
   float:right;color:var(--brass-deep);font-size:18px;font-family:var(--serif);font-style:italic;font-weight:600;
 }
-.est-form input[type=range]{width:100%;-webkit-appearance:none;background:transparent;margin:6px 0 0}
-.est-form input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--line)}
+/* Headcount picker */
+.pc-picker{
+  padding:22px 22px 18px;background:var(--bg-2);
+  border:1px solid var(--line);
+}
+.pc-display{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:20px;
+}
+.pc-big{
+  display:flex;align-items:baseline;gap:2px;
+}
+.pc-big .n{
+  font-family:var(--serif);font-weight:600;font-size:52px;line-height:1;
+  color:var(--brass-deep);letter-spacing:.02em;
+  transition:.2s;
+}
+.pc-big.bump .n{transform:scale(1.08)}
+.pc-big .u{
+  font-family:var(--jp);font-size:16px;color:var(--ink);font-weight:700;margin-left:4px;
+}
+.pc-step{display:flex;gap:8px}
+.pc-step button{
+  width:42px;height:42px;border:1px solid var(--brass);background:#fff;
+  font-family:var(--serif);font-size:22px;color:var(--brass-deep);cursor:pointer;
+  transition:.2s;font-weight:500;
+}
+.pc-step button:hover:not(:disabled){background:var(--brass);color:#fff}
+.pc-step button:disabled{opacity:.3;cursor:not-allowed}
+
+.pc-slider{
+  position:relative;padding:12px 0 6px;
+}
+.pc-slider-track{
+  position:absolute;left:0;right:0;top:50%;height:6px;
+  background:#fff;border:1px solid var(--line);border-radius:3px;
+  transform:translateY(-50%);overflow:hidden;
+}
+.pc-slider-fill{
+  position:absolute;left:0;top:0;bottom:0;
+  background:linear-gradient(90deg,var(--brass-soft),var(--brass));
+  width:14%;transition:.2s;
+}
+.est-form input[type=range]{
+  width:100%;-webkit-appearance:none;appearance:none;background:transparent;
+  margin:0;position:relative;z-index:2;height:28px;cursor:pointer;
+}
+.est-form input[type=range]::-webkit-slider-runnable-track{height:28px;background:transparent}
 .est-form input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:20px;height:20px;border-radius:50%;
-  background:var(--brass);border:3px solid #fff;margin-top:-9px;cursor:pointer;
-  box-shadow:0 0 0 1px var(--brass);
+  -webkit-appearance:none;width:28px;height:28px;border-radius:50%;
+  background:var(--brass);border:4px solid #fff;cursor:grab;
+  box-shadow:0 0 0 1px var(--brass),0 4px 12px rgba(140,109,61,.4);
+  transition:.2s;
 }
-.est-form .scale{
-  display:flex;justify-content:space-between;margin-top:6px;
-  font-size:10px;color:var(--ink-dim);letter-spacing:.08em;
+.est-form input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.1);box-shadow:0 0 0 1px var(--brass),0 6px 18px rgba(140,109,61,.6)}
+.est-form input[type=range]::-webkit-slider-thumb:active{cursor:grabbing}
+.est-form input[type=range]::-moz-range-track{height:28px;background:transparent}
+.est-form input[type=range]::-moz-range-thumb{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--brass);border:4px solid #fff;cursor:grab;
+  box-shadow:0 0 0 1px var(--brass),0 4px 12px rgba(140,109,61,.4);
 }
+
+.pc-ticks{
+  display:grid;grid-template-columns:repeat(8,1fr);
+  margin:14px 0 0;gap:0;position:relative;
+}
+.pc-ticks > span{
+  text-align:center;font-family:var(--serif);font-style:italic;
+  font-size:11px;color:var(--ink-dim);letter-spacing:.05em;
+  position:relative;padding-top:10px;cursor:pointer;transition:.2s;
+}
+.pc-ticks > span::before{
+  content:"";position:absolute;top:-4px;left:50%;transform:translateX(-50%);
+  width:1px;height:8px;background:var(--line);
+}
+.pc-ticks > span:hover{color:var(--brass-deep)}
+.pc-ticks > span.on{color:var(--brass-deep);font-weight:700}
+.pc-ticks > span.on::before{background:var(--brass);height:12px;top:-6px}
+
+.pc-caption{
+  margin-top:14px;padding:10px 12px;background:#fff;border-left:2px solid var(--brass);
+  font-size:11px;color:var(--ink-sub);letter-spacing:.06em;line-height:1.7;
+}
+.pc-caption b{color:var(--brass-deep)}
 .pill-group{display:flex;flex-wrap:wrap;gap:8px}
 .pill{cursor:pointer;position:relative}
 .pill input{position:absolute;opacity:0;pointer-events:none}
@@ -1061,6 +1329,79 @@ a{color:inherit;text-decoration:none;transition:.4s}
   </div>
 </section>
 
+<section class="section gallery">
+  <div class="gallery-wrap">
+    <div class="sec-head">
+      <h2 class="en">G<i>a</i>llery.</h2>
+      <div class="meta">
+        <p class="jp">定禅寺の夜景と、その一夜の記録</p>
+        <p>ウェディング二次会・法人パーティー・ライブ公演・創業40年のダイニング。画像クリックで拡大します。</p>
+      </div>
+    </div>
+    <div class="gallery-filters">
+      <button type="button" class="gf active" data-cat="all">All</button>
+      <button type="button" class="gf" data-cat="party">Party</button>
+      <button type="button" class="gf" data-cat="live">Live</button>
+      <button type="button" class="gf" data-cat="space">Space</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <figure class="gi wide tall" data-cat="party">
+        <span class="gi-cat">— Party —</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo01.jpg" alt="Wedding Party" data-cap="Wedding Party — 定禅寺を望む祝宴">
+        <figcaption>Wedding Party</figcaption>
+      </figure>
+      <figure class="gi" data-cat="party">
+        <span class="gi-cat">— Party —</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo02.jpg" alt="Party" data-cap="貸切パーティー">
+        <figcaption>Party Night</figcaption>
+      </figure>
+      <figure class="gi" data-cat="party">
+        <span class="gi-cat">— Party —</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo03.jpg" alt="Buffet" data-cap="ビュッフェパーティー">
+        <figcaption>Buffet</figcaption>
+      </figure>
+      <figure class="gi tall" data-cat="live">
+        <span class="gi-cat">— Live —</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo06.jpg" alt="Live Session" data-cap="Live Session — 毎月のライブ公演">
+        <figcaption>Live Session</figcaption>
+      </figure>
+      <figure class="gi" data-cat="live">
+        <span class="gi-cat">— Live —</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo04.jpg" alt="Band" data-cap="Band — 生音の夜">
+        <figcaption>Band</figcaption>
+      </figure>
+      <figure class="gi" data-cat="live">
+        <span class="gi-cat">— Live —</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo05.jpg" alt="Stage" data-cap="Stage — スポットライト演出">
+        <figcaption>Stage</figcaption>
+      </figure>
+      <figure class="gi wide" data-cat="live">
+        <span class="gi-cat">— Live —</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo07.jpg" alt="Acoustic" data-cap="Acoustic — しっとりと夜を彩る">
+        <figcaption>Acoustic Night</figcaption>
+      </figure>
+      <figure class="gi" data-cat="space">
+        <span class="gi-cat">— Space —</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/about/photo01.jpg" onerror="this.src='https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo01.jpg'" alt="Space" data-cap="Space — 創業40年の空間">
+        <figcaption>Dining Floor</figcaption>
+      </figure>
+      <figure class="gi" data-cat="space">
+        <span class="gi-cat">— Space —</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/about/photo02.jpg" onerror="this.src='https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo02.jpg'" alt="Space" data-cap="Space — 定禅寺通りの夜景">
+        <figcaption>Jozenji View</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button type="button" class="lb-close" id="lbClose" aria-label="閉じる">×</button>
+  <button type="button" class="lb-nav lb-prev" id="lbPrev" aria-label="前の画像">‹</button>
+  <button type="button" class="lb-nav lb-next" id="lbNext" aria-label="次の画像">›</button>
+  <img id="lbImg" alt="">
+  <div class="lb-caption" id="lbCap"></div>
+</div>
+
 <section class="section plans">
   <div class="sec-head">
     <h2 class="en">Pl<i>a</i>ns.</h2>
@@ -1071,37 +1412,85 @@ a{color:inherit;text-decoration:none;transition:.4s}
   </div>
   <div class="plans-grid">
     <article class="plan">
-      <p class="ic">— Plan 01</p>
-      <h4>ウェディング二次会</h4>
-      <p class="en-name">Wedding After Party</p>
-      <p>9品コース料理＋2時間飲み放題。シャンパンタワー、余興サポート、荷物・景品預かりまで対応。</p>
-      <dl>
-        <dt>人数</dt><dd>50〜100名</dd>
-        <dt>時間</dt><dd>2時間</dd>
-        <dt>料金</dt><dd>¥5,000 / 人</dd>
-      </dl>
+      <div class="plan-media">
+        <span class="plan-badge">Plan 01</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo02.jpg" alt="Wedding After Party">
+        <div class="plan-en-top">Wedding After Party</div>
+      </div>
+      <div class="plan-body">
+        <h4 class="plan-title">ウェディング二次会</h4>
+        <div class="plan-price">
+          <span class="yen">¥</span><span class="num">5,000</span><span class="unit">／ 人（税込）</span>
+        </div>
+        <div class="plan-meta">
+          <div><b>50-100</b><span>名</span></div>
+          <div><b>2h</b><span>時間</span></div>
+          <div><b>9品</b><span>コース</span></div>
+        </div>
+        <ul class="plan-includes">
+          <li>コース料理 9品</li>
+          <li>2時間 飲み放題</li>
+          <li>シャンパンタワー対応</li>
+          <li>余興・BGMサポート</li>
+          <li>荷物・景品預かり</li>
+        </ul>
+        <a href="#reservation" class="plan-btn">このプランで相談する<span class="arr">→</span></a>
+      </div>
     </article>
-    <article class="plan">
-      <p class="ic">— Plan 02</p>
-      <h4>パーティー スタンダード</h4>
-      <p class="en-name">Party Standard</p>
-      <p>ビュッフェ9品＋2時間飲み放題。歓送迎会・打ち上げ・忘新年会・クリスマス会におすすめ。</p>
-      <dl>
-        <dt>人数</dt><dd>50名〜</dd>
-        <dt>時間</dt><dd>2時間</dd>
-        <dt>料金</dt><dd>¥5,000 / 人</dd>
-      </dl>
+
+    <article class="plan featured">
+      <span class="plan-ribbon">— MOST POPULAR —</span>
+      <div class="plan-media">
+        <span class="plan-badge">Plan 03</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo03.jpg" alt="Party Premium">
+        <div class="plan-en-top">Party Premium</div>
+      </div>
+      <div class="plan-body">
+        <h4 class="plan-title">パーティー プレミアム</h4>
+        <div class="plan-price">
+          <span class="yen">¥</span><span class="num">7,000</span><span class="unit">／ 人（税込）</span>
+        </div>
+        <div class="plan-meta">
+          <div><b>50+</b><span>名</span></div>
+          <div><b>2h</b><span>時間</span></div>
+          <div><b>11品</b><span>ビュッフェ</span></div>
+        </div>
+        <ul class="plan-includes">
+          <li>ビュッフェ料理 <b>11品</b>（アップグレード）</li>
+          <li>2時間 飲み放題</li>
+          <li>料理を手厚く豪華に</li>
+          <li>周年・接待・表彰式に最適</li>
+          <li>無料貸出設備フル活用</li>
+        </ul>
+        <a href="#reservation" class="plan-btn">このプランで相談する<span class="arr">→</span></a>
+      </div>
     </article>
+
     <article class="plan">
-      <p class="ic">— Plan 03</p>
-      <h4>パーティー プレミアム</h4>
-      <p class="en-name">Party Premium</p>
-      <p>ビュッフェ11品＋2時間飲み放題。料理を手厚くしたアップグレードプラン。周年・接待利用に。</p>
-      <dl>
-        <dt>人数</dt><dd>50名〜</dd>
-        <dt>時間</dt><dd>2時間</dd>
-        <dt>料金</dt><dd>¥7,000 / 人</dd>
-      </dl>
+      <div class="plan-media">
+        <span class="plan-badge">Plan 02</span>
+        <img src="https://retro-backpage.com/wp/wp-content/themes/backpage/img/live_party/photo01.jpg" alt="Party Standard">
+        <div class="plan-en-top">Party Standard</div>
+      </div>
+      <div class="plan-body">
+        <h4 class="plan-title">パーティー スタンダード</h4>
+        <div class="plan-price">
+          <span class="yen">¥</span><span class="num">5,000</span><span class="unit">／ 人（税込）</span>
+        </div>
+        <div class="plan-meta">
+          <div><b>50+</b><span>名</span></div>
+          <div><b>2h</b><span>時間</span></div>
+          <div><b>9品</b><span>ビュッフェ</span></div>
+        </div>
+        <ul class="plan-includes">
+          <li>ビュッフェ料理 9品</li>
+          <li>2時間 飲み放題</li>
+          <li>歓送迎会・打ち上げに</li>
+          <li>忘新年会・クリスマス会に</li>
+          <li>無料貸出設備を自由に活用</li>
+        </ul>
+        <a href="#reservation" class="plan-btn">このプランで相談する<span class="arr">→</span></a>
+      </div>
     </article>
   </div>
 </section>
@@ -1180,9 +1569,33 @@ a{color:inherit;text-decoration:none;transition:.4s}
             </div>
           </div>
           <div class="field">
-            <label>ご利用人数 <strong id="pcLabel">60名</strong></label>
-            <input type="range" id="pc" min="50" max="120" step="10" value="60">
-            <div class="scale"><span>50名</span><span>80名</span><span>120名</span></div>
+            <label>ご利用人数</label>
+            <div class="pc-picker">
+              <div class="pc-display">
+                <div class="pc-big" id="pcBig">
+                  <span class="n" id="pcLabel">60</span><span class="u">名</span>
+                </div>
+                <div class="pc-step">
+                  <button type="button" id="pcMinus" aria-label="10名減らす">−</button>
+                  <button type="button" id="pcPlus" aria-label="10名増やす">＋</button>
+                </div>
+              </div>
+              <div class="pc-slider">
+                <div class="pc-slider-track"><div class="pc-slider-fill" id="pcFill"></div></div>
+                <input type="range" id="pc" min="50" max="120" step="10" value="60" aria-label="ご利用人数">
+              </div>
+              <div class="pc-ticks" id="pcTicks">
+                <span data-v="50">50</span>
+                <span data-v="60" class="on">60</span>
+                <span data-v="70">70</span>
+                <span data-v="80">80</span>
+                <span data-v="90">90</span>
+                <span data-v="100">100</span>
+                <span data-v="110">110</span>
+                <span data-v="120">120</span>
+              </div>
+              <p class="pc-caption">▲ <b>ツマミをドラッグ</b>／<b>±ボタン</b>／<b>数字をタップ</b> で人数を10名刻みで選択できます。貸切は<b>50名から</b>、最大<b>120名</b>まで。</p>
+            </div>
           </div>
           <div class="field">
             <label>有料オプション</label>
@@ -1380,7 +1793,88 @@ a{color:inherit;text-decoration:none;transition:.4s}
 
   var pc = document.getElementById('pc');
   var pcLabel = document.getElementById('pcLabel');
-  pc.addEventListener('input', function(){ pcLabel.textContent = pc.value + '名'; });
+  var pcFill = document.getElementById('pcFill');
+  var pcBig = document.getElementById('pcBig');
+  var pcMinus = document.getElementById('pcMinus');
+  var pcPlus = document.getElementById('pcPlus');
+  var pcTicks = document.getElementById('pcTicks');
+  function syncPc(){
+    var v = parseInt(pc.value,10);
+    var pct = ((v - parseInt(pc.min,10)) / (parseInt(pc.max,10) - parseInt(pc.min,10))) * 100;
+    pcLabel.textContent = v;
+    pcFill.style.width = pct + '%';
+    pcMinus.disabled = v <= parseInt(pc.min,10);
+    pcPlus.disabled  = v >= parseInt(pc.max,10);
+    Array.prototype.forEach.call(pcTicks.querySelectorAll('span'), function(s){
+      s.classList.toggle('on', parseInt(s.dataset.v,10) === v);
+    });
+    pcBig.classList.add('bump');
+    setTimeout(function(){ pcBig.classList.remove('bump'); }, 180);
+  }
+  pc.addEventListener('input', syncPc);
+  pcMinus.addEventListener('click', function(){
+    var v = parseInt(pc.value,10); if(v>parseInt(pc.min,10)){ pc.value = v-10; syncPc(); }
+  });
+  pcPlus.addEventListener('click', function(){
+    var v = parseInt(pc.value,10); if(v<parseInt(pc.max,10)){ pc.value = v+10; syncPc(); }
+  });
+  Array.prototype.forEach.call(pcTicks.querySelectorAll('span'), function(s){
+    s.addEventListener('click', function(){ pc.value = s.dataset.v; syncPc(); });
+  });
+  syncPc();
+
+  // ===== Gallery filter =====
+  var filters = document.querySelectorAll('.gf');
+  var items = document.querySelectorAll('.gi');
+  filters.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filters.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var cat = btn.dataset.cat;
+      items.forEach(function(it){
+        it.classList.toggle('hide', cat !== 'all' && it.dataset.cat !== cat);
+      });
+    });
+  });
+
+  // ===== Lightbox =====
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var lbClose = document.getElementById('lbClose');
+  var lbPrev = document.getElementById('lbPrev');
+  var lbNext = document.getElementById('lbNext');
+  var lbIndex = 0;
+  function visibleItems(){
+    return Array.prototype.filter.call(items, function(it){ return !it.classList.contains('hide'); });
+  }
+  function openLb(i){
+    var list = visibleItems();
+    if(!list.length) return;
+    lbIndex = (i + list.length) % list.length;
+    var img = list[lbIndex].querySelector('img');
+    lbImg.src = img.src; lbImg.alt = img.alt;
+    lbCap.textContent = img.dataset.cap || img.alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
+  items.forEach(function(it,i){
+    it.addEventListener('click', function(){
+      var list = visibleItems();
+      openLb(list.indexOf(it));
+    });
+  });
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeLb(); });
+  lbPrev.addEventListener('click', function(e){ e.stopPropagation(); openLb(lbIndex-1); });
+  lbNext.addEventListener('click', function(e){ e.stopPropagation(); openLb(lbIndex+1); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') closeLb();
+    if(e.key==='ArrowLeft') openLb(lbIndex-1);
+    if(e.key==='ArrowRight') openLb(lbIndex+1);
+  });
 
   document.getElementById('genBtn').addEventListener('click', function(){
     var planKey = document.querySelector('input[name=plan]:checked').value;
