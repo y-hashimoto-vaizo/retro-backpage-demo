@@ -1596,6 +1596,37 @@ figure.gi figcaption{color:var(--ink) !important;}
 }
 .plan-includes li{color:var(--ink) !important;}
 
+
+
+/* ===== CONTRAST FIX v4 (DARK) — 2026-04-17 ===== */
+/* Pill checked state: brass bg + black text (readable) */
+.pill input:checked + span{
+  background:var(--brass-soft) !important;
+  color:#1a1410 !important;
+  border-color:var(--brass-soft) !important;
+}
+.pill input:checked + span small{color:#1a1410 !important;}
+/* Pill default state: dark bg + cream text */
+.pill > span{
+  background:var(--bg-3) !important;
+  color:var(--ink) !important;
+  border:1px solid var(--line) !important;
+}
+.pill > span small{color:var(--brass-soft) !important;}
+/* Estimator button: brighter bg for white text contrast */
+.est-btn,button.est-btn{
+  background:#f0d090 !important;
+  color:#1a1410 !important;
+  border:none !important;
+  font-weight:700 !important;
+}
+.est-btn:hover{background:#f8dba0 !important;}
+/* Small badges "無料" "¥5,000" etc — if on brass bg, use dark text */
+.plan-includes li small,.included-tag,.free-tag{color:var(--brass-soft) !important;background:transparent !important;}
+/* Any small badge with brass-ish bg */
+.plan-media .plan-badge{background:var(--brass) !important;color:#1a1410 !important;}
+.plan-media .plan-en-top{color:#fff !important;}
+
 </style>
 </head>
 <body>

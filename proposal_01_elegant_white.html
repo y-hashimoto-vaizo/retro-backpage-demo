@@ -1507,6 +1507,32 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
 .hero-jp,.hero .sub{color:rgba(255,255,255,.95) !important;text-shadow:0 1px 4px rgba(0,0,0,.5);}
 .hero-estab{color:#fff !important;}
 
+
+
+/* ===== CONTRAST FIX v4 (WHITE) — 2026-04-17 ===== */
+/* Pill checked state: use deep brass bg + white text */
+.pill input:checked + span{
+  background:var(--brass-deep) !important;
+  color:#fff !important;
+  border-color:var(--brass-deep) !important;
+}
+.pill input:checked + span small{color:#fff !important;}
+.pill > span{color:#3a2818 !important;background:#fff !important;border:1px solid var(--brass-deep) !important;}
+.pill > span small{color:var(--brass-deep) !important;}
+/* Estimator button */
+.est-btn,button.est-btn{
+  background:var(--brass-deep) !important;
+  color:#fff !important;
+  border:none !important;
+}
+.est-btn:hover{background:#4a321a !important;}
+/* Small brass badges like 無料 / 貸出 tag */
+.plan-includes li small,.plan-includes li em,.included-tag,.free-tag,
+.plan-includes .tag,.plan-includes b{color:var(--brass-deep) !important;}
+/* hero-estab kicker */
+.hero-estab{color:#fff !important;}
+.hero-estab::before,.hero-estab::after{background:#fff !important;}
+
 </style>
 </head>
 <body>
