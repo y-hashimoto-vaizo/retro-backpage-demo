@@ -1466,6 +1466,47 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .pc-caption,.cal-legend span,small,.plan-meta span{color:var(--ink-sub) !important;}
 .unit,.plan-meta span{color:var(--ink-sub) !important;}
 
+
+
+/* ===== CONTRAST/UNIFY FIX v3 — 2026-04-17 ===== */
+/* Unify PARTY section title with other section titles */
+.party-text h3{
+  font-family:"Cormorant Garamond","EB Garamond",serif !important;
+  font-size:clamp(34px,4.2vw,56px) !important;
+  font-weight:500 !important;
+  letter-spacing:.04em !important;
+  line-height:1 !important;
+  color:var(--ink) !important;
+}
+.party-text h3 i{
+  font-style:italic !important;
+  color:var(--brass) !important;
+  font-weight:500 !important;
+}
+
+/* Small-text sub readability bump (both themes) */
+.plan-meta span,.plan-meta div span,.unit,.plan-includes li,
+.cal-legend span,.tel-hours,.tel-lead,.plabel,.hours,
+.flow-step p,small{
+  color:var(--ink-sub) !important;
+}
+/* Force minimum readable size for sub labels */
+.plan-meta span{font-size:11px !important;font-weight:600 !important;}
+
+/* Tagline small — ensure visible */
+.elegant-tagline,.heritage-badge,.urban-tagline{font-weight:500 !important;}
+
+/* White theme: ensure all brass text is --brass-deep */
+body.retro-bp-white-edition .brass-text,body .hero h1,
+.sec-head .en i,.party-text h3 i,.plan-en-top{color:var(--brass-deep) !important;}
+/* Plan meta labels in white */
+.plan-meta span{color:#5a4830 !important;}
+.unit{color:#5a4830 !important;}
+.plan-includes li{color:#3a2818 !important;}
+.cal-legend span{color:#3a2818 !important;}
+.hero-jp,.hero .sub{color:rgba(255,255,255,.95) !important;text-shadow:0 1px 4px rgba(0,0,0,.5);}
+.hero-estab{color:#fff !important;}
+
 </style>
 </head>
 <body>
@@ -1709,29 +1750,6 @@ a{color:inherit;text-decoration:none;transition:.4s}
       <h2>Charter <i>&amp;</i> Book.</h2>
       <p class="jp">法人様の貸切・歓送迎会・周年イベントにも柔軟にご対応します。</p>
     </div>
-
-    <ul class="corp-benefits">
-      <li>
-        <span class="num">— 01</span>
-        <span class="tt">最大120名の貸切</span>
-        <span class="ds">貸切は50名様から。<br>歓送迎会から周年まで。</span>
-      </li>
-      <li>
-        <span class="num">— 02</span>
-        <span class="tt">創業40年の実績</span>
-        <span class="ds">老舗ダイニングとして<br>仙台の夜を運営。</span>
-      </li>
-      <li>
-        <span class="num">— 03</span>
-        <span class="tt">見積シミュレーター</span>
-        <span class="ds">人数と機材を選ぶだけで<br>その場で概算を出力。</span>
-      </li>
-      <li>
-        <span class="num">— 04</span>
-        <span class="tt">貸出設備が充実</span>
-        <span class="ds">マイク・プロジェクター等<br>多くが無料貸出。</span>
-      </li>
-    </ul>
 
     <div class="flow">
       <p class="flow-head">— Booking Flow —</p>
