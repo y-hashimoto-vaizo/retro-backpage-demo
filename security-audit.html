@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>脆弱性診断レポート｜retro Back Page（2026-04-19）</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#faf7f1;--ink:#2a2218;--ink-sub:#4d3f2c;--ink-dim:#6a5b43;
+  --brass:#8a6530;--brass-deep:#5e4420;
+  --red:#c23b1e;--red-bg:#fce9e4;
+  --yellow:#c08820;--yellow-bg:#fbefd5;
+  --green:#2f7a2b;--green-bg:#e3f1dd;
+  --line:rgba(90,72,48,.22);
+  --shadow:0 12px 32px -18px rgba(76,56,24,.22);
+  --serif:"Cormorant Garamond",serif;
+  --jp:"Noto Serif JP",serif;
+  --sans:"Noto Sans JP",sans-serif;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:60px 32px 120px}
+h1.doc-title{font-family:var(--serif);font-weight:500;font-size:40px;color:var(--brass-deep);letter-spacing:.02em;margin-bottom:6px;line-height:1.2}
+h1.doc-sub{font-family:var(--jp);font-weight:600;font-size:22px;color:var(--ink);margin-bottom:24px;letter-spacing:.04em}
+.meta{display:flex;flex-wrap:wrap;gap:12px 32px;padding:16px 22px;background:#fff;border-left:3px solid var(--brass);box-shadow:var(--shadow);margin-bottom:40px;font-size:13px;color:var(--ink-sub)}
+.meta b{color:var(--ink);margin-right:6px}
+h2{font-family:var(--serif);font-weight:500;font-size:30px;color:var(--ink);margin:70px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--line);letter-spacing:.02em}
+h2 .num{color:var(--brass);font-style:italic;margin-right:14px}
+h3{font-family:var(--jp);font-weight:600;font-size:19px;margin:36px 0 14px;padding-left:12px;border-left:3px solid var(--brass);color:var(--ink);letter-spacing:.04em}
+p{margin-bottom:12px;color:var(--ink-sub)}
+strong{color:var(--ink);font-weight:700}
+ul{margin:10px 0 20px 1.4em;color:var(--ink-sub)}li{margin-bottom:6px}
+.summary-card{padding:24px 28px;background:linear-gradient(135deg,#fff 0%,#f3ebd7 100%);border-left:4px solid var(--brass);border-radius:0 8px 8px 0;box-shadow:var(--shadow);margin:14px 0 36px}
+.summary-card h3{border:none;padding:0;margin:0 0 14px}
+.signal-table{width:100%;border-collapse:collapse;margin:18px 0 30px;background:#fff;box-shadow:var(--shadow);border-radius:6px;overflow:hidden}
+.signal-table th{background:var(--brass-deep);color:#fff;padding:12px 14px;text-align:left;font-size:13px;letter-spacing:.06em}
+.signal-table td{padding:12px 14px;border-bottom:1px solid rgba(90,72,48,.1);font-size:14px;vertical-align:top}
+.signal-table tr:last-child td{border-bottom:none}
+.signal-table tr:nth-child(even){background:#faf7f1}
+.sig{display:inline-block;padding:3px 10px;border-radius:3px;font-size:12px;font-weight:700;letter-spacing:.06em;margin-right:6px;vertical-align:middle}
+.sig.red{background:var(--red-bg);color:var(--red)}
+.sig.yellow{background:var(--yellow-bg);color:var(--yellow)}
+.sig.green{background:var(--green-bg);color:var(--green)}
+.finding{background:#fff;border:1px solid var(--line);border-radius:6px;margin:18px 0;padding:22px 26px;box-shadow:var(--shadow)}
+.finding.r{border-left:4px solid var(--red)}
+.finding.y{border-left:4px solid var(--yellow)}
+.finding.g{border-left:4px solid var(--green)}
+.finding h4{font-family:var(--jp);font-size:17px;font-weight:600;color:var(--ink);margin:0 0 12px;display:flex;align-items:center;gap:10px;line-height:1.5}
+.finding h4 .no{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--brass-deep);color:#fff;font-family:var(--serif);font-weight:500;font-size:14px;flex-shrink:0}
+.finding .block{margin-top:14px;padding:12px 16px;border-radius:4px;font-size:13.5px;line-height:1.8}
+.finding .block.what{background:#faf7f1}
+.finding .block.risk{background:var(--red-bg);color:var(--ink-sub)}
+.finding .block.fix{background:var(--green-bg);color:var(--ink-sub)}
+.finding .block b{color:var(--ink);font-weight:700}
+.finding .block-label{display:block;font-size:12px;font-weight:700;color:var(--brass-deep);letter-spacing:.1em;margin-bottom:4px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 30px}
+.stat-grid .tile{background:#fff;border:1px solid var(--line);border-radius:6px;padding:18px 20px;box-shadow:var(--shadow);text-align:center}
+.stat-grid .tile .n{font-family:var(--serif);font-size:36px;font-weight:500;color:var(--brass-deep);line-height:1}
+.stat-grid .tile .n.r{color:var(--red)}
+.stat-grid .tile .n.y{color:var(--yellow)}
+.stat-grid .tile .n.g{color:var(--green)}
+.stat-grid .tile .l{margin-top:6px;font-size:12px;color:var(--ink-dim);letter-spacing:.05em}
+.cta{margin-top:50px;padding:30px 32px;background:linear-gradient(135deg,var(--brass-deep) 0%,#3b2a16 100%);color:#f5ead3;border-radius:8px;box-shadow:0 20px 40px -20px rgba(58,42,20,.4)}
+.cta h3{border:none;padding:0;margin:0 0 14px;color:#fff}
+.cta p{color:#f5ead3}
+.cta .sign{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);text-align:right;font-family:var(--serif);font-style:italic;font-size:13px;color:#e3d3a9}
+.note{font-size:12px;color:var(--ink-dim);font-style:italic;margin:14px 0}
+@media(max-width:700px){
+  .wrap{padding:40px 20px 80px}
+  h1.doc-title{font-size:30px}
+  h1.doc-sub{font-size:18px}
+  .stat-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1 class="doc-title">脆弱性診断レポート</h1>
+<h1 class="doc-sub">retro Back Page 公式サイト（retro-backpage.com）</h1>
+
+<div class="meta">
+  <span><b>診断日</b>2026年4月19日</span>
+  <span><b>診断対象</b>retro-backpage.com（トップ／LIVE&amp;PARTY）</span>
+  <span><b>診断者</b>株式会社VAIZO／EnterWebAI</span>
+</div>
+
+<!-- ===== Intro ===== -->
+<section>
+<h2>はじめに — このレポートは何？</h2>
+<p>今のretro Back Pageの公式サイトを外から見て、<strong>セキュリティ（お客様の安全）</strong>と<strong>見え方（SEO・スマホ対応）</strong>の観点で「引っかかる箇所」を洗い出した診断書です。</p>
+<p>技術的な細かい話は全部こちらで巻き取るので、<strong>「何が起きてて、どれくらいヤバくて、どう直るのか」</strong>だけ見てもらえれば大丈夫です。信号機の色（🔴🟡🟢）で重要度がひと目で分かるようにしてあります。</p>
+
+<h3>信号色の見方</h3>
+<ul>
+<li><span class="sig red">🔴 RED</span>いますぐ直したい。実害やお客様の離脱につながっている</li>
+<li><span class="sig yellow">🟡 YELLOW</span>早めに直したい。放置すると徐々に損する</li>
+<li><span class="sig green">🟢 GREEN</span>問題なし、もしくは土台はできている</li>
+</ul>
+</section>
+
+<!-- ===== Summary ===== -->
+<section>
+<h2><span class="num">I.</span>ひと目で分かる診断結果</h2>
+
+<div class="stat-grid">
+<div class="tile"><div class="n r">4</div><div class="l">🔴 すぐ直したい</div></div>
+<div class="tile"><div class="n y">6</div><div class="l">🟡 早めに直したい</div></div>
+<div class="tile"><div class="n g">5</div><div class="l">🟢 土台OK</div></div>
+</div>
+
+<table class="signal-table">
+<thead><tr><th style="width:70px">信号</th><th>項目</th><th>要点</th></tr></thead>
+<tbody>
+<tr><td><span class="sig red">🔴</span></td><td>HTTPで開くと警告が出る</td><td>証明書はあるのに強制切替設定がない</td></tr>
+<tr><td><span class="sig red">🔴</span></td><td>サイト内リンクが全部「http://」</td><td>せっかくHTTPSで開いても元に戻される</td></tr>
+<tr><td><span class="sig red">🔴</span></td><td>スマホで米粒文字になる</td><td>スマホ対応の基本設定1行が抜けている</td></tr>
+<tr><td><span class="sig red">🔴</span></td><td>管理ログインIDが外部から読める</td><td>ブルートフォース攻撃の入口になり得る</td></tr>
+<tr><td><span class="sig yellow">🟡</span></td><td>Google検索の紹介文が空っぽ</td><td>検索結果でアピールできない</td></tr>
+<tr><td><span class="sig yellow">🟡</span></td><td>タイトルに誤字「ダイニングー」</td><td>検索結果にも誤字のまま露出</td></tr>
+<tr><td><span class="sig yellow">🟡</span></td><td>ページ見出しが空（H1）</td><td>Googleがページの主題を認識しにくい</td></tr>
+<tr><td><span class="sig yellow">🟡</span></td><td>XMLRPC機能が有効のまま</td><td>古い外部連携API。攻撃の入口になり得る</td></tr>
+<tr><td><span class="sig yellow">🟡</span></td><td>WordPressバージョンが外から見える</td><td>攻撃者に弱点を教えている状態</td></tr>
+<tr><td><span class="sig yellow">🟡</span></td><td>使用プラグインの名前・バージョンが丸見え</td><td>同上</td></tr>
+<tr><td><span class="sig green">🟢</span></td><td>SSL証明書は有効</td><td>CloudSecure発行、2026年8月まで有効</td></tr>
+<tr><td><span class="sig green">🟢</span></td><td>WordPress本体は最新版</td><td>6.9.4</td></tr>
+<tr><td><span class="sig green">🟢</span></td><td>GA4アクセス解析が稼働中</td><td>測定の土台はある</td></tr>
+<tr><td><span class="sig green">🟢</span></td><td>サーバーがnginx運用</td><td>安定した構成</td></tr>
+<tr><td><span class="sig green">🟢</span></td><td>デザインの土台は良好</td><td>書体・色の統一感あり</td></tr>
+</tbody>
+</table>
+
+<div class="summary-card">
+<h3>総評</h3>
+<p><strong>土台は意外と良いです。</strong>WordPress本体は最新版で、SSL証明書もちゃんと入ってて、GA4も計測を始めている。ただ「設定漏れ」が積み重なって、<strong>本来できるはずの防御とアピールがスカスカ</strong>になってる状態です。</p>
+<p>特に赤信号4つは<strong>全部1日〜半日で直せるレベル</strong>で、費用もほぼかかりません。ここを先に潰すだけで、見た目は何も変わらないのに「怖くないサイト」「スマホでちゃんと読めるサイト」になります。</p>
+</div>
+</section>
+
+<!-- ===== RED ===== -->
+<section>
+<h2><span class="num">II.</span>🔴 すぐ直したい — 4件</h2>
+
+<div class="finding r">
+<h4><span class="no">1</span>HTTPで開くと「保護されていない通信」の警告が出る</h4>
+<div class="block what"><span class="block-label">何が起きている</span>
+<b>SSL証明書は入っているので、「https://」で開けば安全に開けます。</b>ただ、「http://」で開いたときに自動で「https://」へ切り替える設定（HTTPS強制リダイレクト）が入っていません。そのため古いブックマークや昔の広告、Google検索の古いキャッシュから来た人には、ブラウザの上に赤字で「保護されていない通信」と警告が出ます。
+</div>
+<div class="block risk"><span class="block-label">放置するとどうなる</span>
+法人の総務担当者ほど、この警告が出たサイトを敬遠します。「会社のPCで開いて大丈夫か？」という心配が、問い合わせ前の離脱につながります。
+</div>
+<div class="block fix"><span class="block-label">どう直す</span>
+サーバー側（エックスサーバー）で「常時SSL化」のチェックを入れるだけ。作業時間30分程度。追加費用は一切かかりません。
+</div>
+</div>
+
+<div class="finding r">
+<h4><span class="no">2</span>サイト内のリンクが全部「http://」で書かれている</h4>
+<div class="block what"><span class="block-label">何が起きている</span>
+メニュー・画像・スタイルシート・フッターのリンクが全部「<code>http://retro-backpage.com/...</code>」と書かれています。仮にお客様が「https://」で入ってきても、メニューを1回クリックすると「http://」のページに戻されます。画像も「http://」で読み込まれるので、ブラウザによっては「混在コンテンツ」警告で画像が表示されないことも。
+</div>
+<div class="block risk"><span class="block-label">放置するとどうなる</span>
+項目①と合わせて、<b>ユーザーを安全なページに留めておけない状態</b>。SEO評価も落ちます（Googleは常時HTTPS化を推奨）。
+</div>
+<div class="block fix"><span class="block-label">どう直す</span>
+WordPress管理画面の「一般設定」でURLを「https://」に変更＋データベースの一括置換（プラグインで半日）。作業時間合わせて半日。
+</div>
+</div>
+
+<div class="finding r">
+<h4><span class="no">3</span>スマホで米粒みたいな文字になる</h4>
+<div class="block what"><span class="block-label">何が起きている</span>
+スマホ向けの基本設定（「viewport」という1行のおまじない）がHTMLに入っていません。このため<b>スマホで開くとPC画面がそのまま縮小されて表示される</b>＝米粒のような小ささで、読むにはいちいちピンチアウトで拡大する必要があります。
+</div>
+<div class="block risk"><span class="block-label">放置するとどうなる</span>
+飲食店サイトの閲覧者の<b>7〜8割はスマホユーザー</b>。米粒文字で開いた瞬間、ほぼ全員が即離脱します。これだけで機会損失が何倍にも膨らみます。
+</div>
+<div class="block fix"><span class="block-label">どう直す</span>
+HTMLのheadに1行だけ足す、というレベルの作業。<code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>を追加。作業時間15分。
+</div>
+</div>
+
+<div class="finding r">
+<h4><span class="no">4</span>管理画面のログインIDが外部から見える状態</h4>
+<div class="block what"><span class="block-label">何が起きている</span>
+WordPressの標準API（<code>/wp-json/wp/v2/users</code>）にアクセスすると、管理ユーザー名が取得できます。今回の診断では<b>「backpage」</b>というログインIDが丸見えになっていました。パスワードは見えませんが、<b>攻撃者は「ID=backpage」で当たりをつけて、パスワードを総当たりで試す</b>ことができます。
+</div>
+<div class="block risk"><span class="block-label">放置するとどうなる</span>
+パスワードが弱いと、数日〜数週間でログインを突破され、サイト改ざん・ウイルス設置・個人情報流出に直結します。飲食店でも実際に被害多発。
+</div>
+<div class="block fix"><span class="block-label">どう直す</span>
+①セキュリティプラグイン（Wordfence等）を入れてユーザー列挙をブロック、②管理者のログインIDを「backpage」から推測しにくい文字列に変更、③パスワードを強固に。作業時間1〜2時間。
+</div>
+</div>
+</section>
+
+<!-- ===== YELLOW ===== -->
+<section>
+<h2><span class="num">III.</span>🟡 早めに直したい — 6件</h2>
+
+<div class="finding y">
+<h4><span class="no">5</span>Google検索の「紹介文」が空っぽ</h4>
+<div class="block what"><span class="block-label">何が起きている</span>
+Googleで検索したときに、青いリンクの下に2〜3行表示される紹介文を作る設定（meta description）が<b>完全に空</b>です。Googleが勝手にページから抜粋するため、ふさわしくない文章が載ることもあります。
+</div>
+<div class="block fix"><span class="block-label">どう直す</span>
+各ページに「夜景×本格料理×ライブ対応の老舗ダイニングバー。最大120名の貸切OK」のような紹介文を1ページずつ設定。作業時間1〜2時間。
+</div>
+</div>
+
+<div class="finding y">
+<h4><span class="no">6</span>タイトルに誤字「ダイニングー」</h4>
+<div class="block what"><span class="block-label">何が起きている</span>
+HTMLタイトルが「老舗ダイニング<b>ー</b>」になっています。正しくは「ダイニング<b>バー</b>」。Google検索の結果にも、ブラウザタブにも、この誤字のまま表示されています。
+</div>
+<div class="block fix"><span class="block-label">どう直す</span>
+WordPress管理画面からテンプレートのtitle部分を修正。作業時間10分。
+</div>
+</div>
+
+<div class="finding y">
+<h4><span class="no">7</span>ページ見出し（H1）の中身が画像だけ</h4>
+<div class="block what"><span class="block-label">何が起きている</span>
+HTMLの最重要見出しタグ「H1」の中身が<b>ロゴ画像へのリンクのみ</b>で、テキストが一切入っていません。Googleにとっては「このページが何のページか」が伝わりづらい状態。
+</div>
+<div class="block fix"><span class="block-label">どう直す</span>
+各ページのH1に「retro Back Page ライブ＆パーティー」のような意味のあるテキストを追加（画像ロゴと両立できる書き方あり）。作業時間30分。
+</div>
+</div>
+
+<div class="finding y">
+<h4><span class="no">8</span>XMLRPC機能（古い外部連携用API）が有効のまま</h4>
+<div class="block what"><span class="block-label">何が起きている</span>
+WordPressの古い外部連携機能「xmlrpc.php」が、使っていないのに有効のまま開いています。これは<b>ログイン試行の大量攻撃（ブルートフォース）に悪用される定番の入口</b>として知られています。
+</div>
+<div class="block fix"><span class="block-label">どう直す</span>
+セキュリティプラグインで無効化、またはサーバー設定で該当URLをブロック。作業時間30分。
+</div>
+</div>
+
+<div class="finding y">
+<h4><span class="no">9</span>WordPressのバージョン情報が外から見える</h4>
+<div class="block what"><span class="block-label">何が起きている</span>
+HTMLの中に<code>&lt;meta name="generator" content="WordPress 6.9.4"&gt;</code>と書かれていて、<b>外部から使用バージョンが丸見え</b>になっています。攻撃者は特定バージョンの弱点を狙うので、情報は隠したほうが安全です。
+</div>
+<div class="block fix"><span class="block-label">どう直す</span>
+WordPress設定か、functions.phpに数行追記してバージョン情報を出力しないようにする。作業時間20分。
+</div>
+</div>
+
+<div class="finding y">
+<h4><span class="no">10</span>使用プラグインの名前とバージョンが丸見え</h4>
+<div class="block what"><span class="block-label">何が起きている</span>
+HTML内のCSS・JavaScriptの読み込みに<code>contact-form-7/5.9.3</code>のように<b>プラグイン名とバージョンが露出</b>しています。攻撃者はこの情報から「このプラグインのこのバージョンには、この弱点がある」と調べて狙ってきます。
+</div>
+<div class="block fix"><span class="block-label">どう直す</span>
+バージョン情報を非表示化する設定、もしくは専用プラグインの利用。作業時間30分。
+</div>
+</div>
+</section>
+
+<!-- ===== GREEN ===== -->
+<section>
+<h2><span class="num">IV.</span>🟢 土台はできている — 5件</h2>
+
+<div class="finding g">
+<h4><span class="no">11</span>SSL証明書は有効（2026年8月まで）</h4>
+<p>CloudSecure社発行の正規証明書が入っています。HTTPSで開けば通信は暗号化され安全です。問題は<b>HTTPSを「強制する設定」が抜けている</b>ことだけ（→項目①）。証明書自体は良好。</p>
+</div>
+
+<div class="finding g">
+<h4><span class="no">12</span>WordPressは最新版（6.9.4）</h4>
+<p>本体は最新で、既知の重大な脆弱性はありません。定期的にアップデートされている様子で、この点は◎。</p>
+</div>
+
+<div class="finding g">
+<h4><span class="no">13</span>アクセス解析（GA4）設置済み</h4>
+<p>2種類のGA4タグが稼働中。計測の土台はすでにあるので、改修後の効果測定もすぐ始められます。</p>
+</div>
+
+<div class="finding g">
+<h4><span class="no">14</span>サーバー構成がnginx</h4>
+<p>高速・安定型の構成。Apacheより軽量で、静的コンテンツ配信に強い。</p>
+</div>
+
+<div class="finding g">
+<h4><span class="no">15</span>デザインの土台は整っている</h4>
+<p>書体はNoto Sans JP＋Shippori Mincho、色味も統一感があり、上品な世界観。<b>デザインを大改造する必要はなし。</b>中身の整理と技術設定の修正だけで、一気に見違えます。</p>
+</div>
+</section>
+
+<!-- ===== Next Steps ===== -->
+<section>
+<h2><span class="num">V.</span>直すときの順番（おすすめ）</h2>
+
+<table class="signal-table">
+<thead><tr><th style="width:80px">順番</th><th>やること</th><th>作業時間</th></tr></thead>
+<tbody>
+<tr><td>Step 1</td><td>viewport 1行を足す（項目③）</td><td>15分</td></tr>
+<tr><td>Step 2</td><td>HTTPS強制リダイレクト設定（項目①）</td><td>30分</td></tr>
+<tr><td>Step 3</td><td>サイト内リンクのhttps化（項目②）</td><td>半日</td></tr>
+<tr><td>Step 4</td><td>管理ID秘匿＋セキュリティ強化（項目④⑧⑨⑩）</td><td>2〜3時間</td></tr>
+<tr><td>Step 5</td><td>タイトル修正・紹介文・H1（項目⑤⑥⑦）</td><td>2〜3時間</td></tr>
+</tbody>
+</table>
+
+<p>Step1〜4までやるだけで、<b>🔴赤と🟡黄の大部分が消えます</b>。合計でまる1日ちょいの作業。追加コストはほぼゼロです。</p>
+</section>
+
+<!-- ===== CTA ===== -->
+<div class="cta">
+<h3>このレポートを受けて</h3>
+<p>上の15項目、<b>全部まとめて本プロジェクトの中で直します。</b>別料金なし、スコープ内です。</p>
+<p>Step1〜4は契約初週のうちに全部クリアにして、「見えない・怖い」の状態を先に解消。その後にデザイン刷新・見積書PDF・広告・顧客データベース整備を積み上げていきます。</p>
+<p>疑問点・気になる項目あれば、どれでも口頭で補足します。全部カバーしに行きますので安心してください。</p>
+<div class="sign">株式会社VAIZO ／ EnterWebAI 事業部 ／ 橋本</div>
+</div>
+
+<p class="note">※ 本レポートは2026年4月19日時点でretro-backpage.comの公開されているHTMLソースおよびサーバー応答を外部から解析した結果に基づきます。ログインが必要な管理画面や非公開のファイルシステムは診断対象外です。</p>
+
+</div>
+</body>
+</html>
