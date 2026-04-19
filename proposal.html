@@ -42,7 +42,7 @@ a{color:var(--brass-deep);text-decoration:none;border-bottom:1px solid rgba(94,6
 a:hover{color:var(--brass);border-bottom-color:var(--brass)}
 
 /* ===== Layout ===== */
-.layout{display:grid;grid-template-columns:260px 1fr;max-width:1600px;margin:0 auto;min-height:100vh}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:none;margin:0 auto;min-height:100vh}
 .toc{
   position:sticky;top:0;align-self:start;
   height:100vh;overflow-y:auto;
@@ -85,7 +85,7 @@ a:hover{color:var(--brass);border-bottom-color:var(--brass)}
   font-size:11px;color:var(--ink-dim);line-height:1.7;
 }
 
-main{padding:60px 80px 120px;max-width:1280px;width:100%}
+main{padding:60px 80px 120px;max-width:none;width:100%}
 
 /* ===== Headings ===== */
 h1.doc-title{
