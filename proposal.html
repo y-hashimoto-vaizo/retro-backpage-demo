@@ -42,7 +42,8 @@ a{color:var(--brass-deep);text-decoration:none;border-bottom:1px solid rgba(94,6
 a:hover{color:var(--brass);border-bottom-color:var(--brass)}
 
 /* ===== Layout ===== */
-.layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.layout{display:flex;min-height:100vh}
+.toc{flex:0 0 260px}
 .toc{
   position:sticky;top:0;align-self:start;
   height:100vh;overflow-y:auto;
@@ -85,7 +86,7 @@ a:hover{color:var(--brass);border-bottom-color:var(--brass)}
   font-size:11px;color:var(--ink-dim);line-height:1.7;
 }
 
-main{padding:60px 80px 120px}
+main{flex:1 1 0;min-width:0;padding:60px 80px 120px}
 
 /* ===== Headings ===== */
 h1.doc-title{
