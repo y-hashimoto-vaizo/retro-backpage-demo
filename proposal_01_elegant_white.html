@@ -684,7 +684,7 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .cal-legend b.ask{color:#8c6d3d}
 .cal-legend b.full{color:#a84f4f}
 
-/* Contact dual card (phone + LINE) */
+/* Contact dual card (phone + mail) */
 .contact-dual{display:flex;flex-direction:column;gap:18px}
 
 .tel-card{
@@ -740,36 +740,36 @@ a{color:inherit;text-decoration:none;transition:.4s}
   padding:6px 8px;background:rgba(255,255,255,.1);border-left:2px solid rgba(255,255,255,.5);
 }
 
-.line-card{
+.mail-card{
   background:linear-gradient(165deg,#c69553 0%,#8a6732 100%);
   padding:38px 30px;position:relative;overflow:hidden;
   box-shadow:0 20px 50px -15px rgba(138,103,50,.4);
 }
-.line-card::before{
+.mail-card::before{
   content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;
   background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);
 }
-.line-card .li-icon{
+.mail-card .li-icon{
   width:56px;height:56px;border-radius:14px;background:#fff;
   display:flex;align-items:center;justify-content:center;margin-bottom:20px;
   font-family:var(--serif);font-weight:700;font-size:20px;color:var(--brass-deep);
   box-shadow:0 8px 20px rgba(0,0,0,.2);position:relative;z-index:2;
 }
-.line-card h4{
+.mail-card h4{
   font-family:var(--jp);font-size:19px;font-weight:700;letter-spacing:.08em;
   color:#fff;margin-bottom:12px;line-height:1.5;position:relative;z-index:2;
 }
-.line-card h4 em{font-style:normal;color:#fff;background:rgba(0,0,0,.15);padding:2px 10px;border-radius:4px;font-size:.85em}
-.line-card p{font-size:13px;color:rgba(255,255,255,.92);line-height:1.9;margin-bottom:24px;position:relative;z-index:2}
-.line-btn{
+.mail-card h4 em{font-style:normal;color:#fff;background:rgba(0,0,0,.15);padding:2px 10px;border-radius:4px;font-size:.85em}
+.mail-card p{font-size:13px;color:rgba(255,255,255,.92);line-height:1.9;margin-bottom:24px;position:relative;z-index:2}
+.mail-btn{
   display:flex;align-items:center;justify-content:center;gap:12px;
   width:100%;padding:18px;background:#fff;color:var(--brass-deep);
   font-family:var(--jp);font-weight:700;font-size:14px;letter-spacing:.1em;
   border:none;cursor:pointer;transition:.3s;position:relative;z-index:2;
   box-shadow:0 10px 20px rgba(0,0,0,.15);
 }
-.line-btn:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(0,0,0,.25);color:var(--brass)}
-.line-btn .plus{
+.mail-btn:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(0,0,0,.25);color:var(--brass)}
+.mail-btn .plus{
   width:22px;height:22px;border-radius:50%;background:var(--brass-deep);color:#fff;
   display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;
 }
@@ -1081,7 +1081,7 @@ a{color:inherit;text-decoration:none;transition:.4s}
   .copy{flex-direction:column;gap:10px;text-align:center}
 }
 
-/* ===== Floating dual CTA (Phone + LINE) ===== */
+/* ===== Floating dual CTA (Phone + Mail) ===== */
 .float-cta{
   position:fixed;right:20px;bottom:20px;z-index:999;
   display:flex;flex-direction:column;gap:12px;
@@ -1112,7 +1112,7 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .float-tel .txt small{font-size:9px;letter-spacing:.15em;opacity:.9;font-weight:500;margin-bottom:2px}
 .float-tel .txt b{font-family:var(--serif);font-weight:700;letter-spacing:.02em;font-size:15px}
 
-.float-line{
+.float-mail{
   display:inline-flex;align-items:center;gap:12px;
   padding:14px 22px;
   background:linear-gradient(165deg,#c69553 0%,#8a6732 100%);
@@ -1121,19 +1121,19 @@ a{color:inherit;text-decoration:none;transition:.4s}
   box-shadow:0 14px 34px -10px rgba(138,103,50,.55),0 0 0 1px rgba(255,255,255,.1);
   transition:.3s;position:relative;
 }
-.float-line::after{
+.float-mail::after{
   content:"";position:absolute;inset:0;border-radius:50px;
   border:2px solid #c69553;animation:floatPulse 2.4s ease-out infinite;pointer-events:none;
 }
 @keyframes floatPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.15);opacity:0}}
-.float-line:hover{transform:translateY(-3px);box-shadow:0 20px 50px -10px rgba(138,103,50,.75)}
-.float-line .ic{
+.float-mail:hover{transform:translateY(-3px);box-shadow:0 20px 50px -10px rgba(138,103,50,.75)}
+.float-mail .ic{
   width:30px;height:30px;background:#fff;color:var(--brass-deep);border-radius:8px;
   display:flex;align-items:center;justify-content:center;
   font-family:var(--serif);font-weight:700;font-size:14px;flex-shrink:0;
 }
-.float-line .txt{display:flex;flex-direction:column;line-height:1.2;text-align:left}
-.float-line .txt small{font-size:9px;letter-spacing:.15em;opacity:.85;font-weight:500;margin-bottom:2px}
+.float-mail .txt{display:flex;flex-direction:column;line-height:1.2;text-align:left}
+.float-mail .txt small{font-size:9px;letter-spacing:.15em;opacity:.85;font-weight:500;margin-bottom:2px}
 
 /* ===== Mobile polish (<=640px) ===== */
 @media(max-width:640px){
@@ -1250,11 +1250,11 @@ a{color:inherit;text-decoration:none;transition:.4s}
   .tel-card .tel-icon{width:46px;height:46px;font-size:18px;margin-bottom:14px}
   .tel-card h4{font-size:13px;letter-spacing:.1em}
   .tel-card .tel-num{font-size:28px}
-  .line-card{padding:26px 22px}
-  .line-card .li-icon{width:46px;height:46px;font-size:20px;border-radius:10px;margin-bottom:14px}
-  .line-card h4{font-size:16px;line-height:1.6}
-  .line-card p{font-size:12px;margin-bottom:18px}
-  .line-btn{padding:16px;font-size:13px}
+  .mail-card{padding:26px 22px}
+  .mail-card .li-icon{width:46px;height:46px;font-size:20px;border-radius:10px;margin-bottom:14px}
+  .mail-card h4{font-size:16px;line-height:1.6}
+  .mail-card p{font-size:12px;margin-bottom:18px}
+  .mail-btn{padding:16px;font-size:13px}
 
   .info{padding:64px 16px}
   .info h3{font-size:34px}
@@ -1279,16 +1279,16 @@ a{color:inherit;text-decoration:none;transition:.4s}
     pointer-events:auto;
   }
   .float-cta > a{flex:1}
-  .float-tel,.float-line{
+  .float-tel,.float-mail{
     border-radius:0;padding:14px 8px;
     justify-content:center;box-shadow:none;
     font-size:13px;gap:8px;color:#fff;
   }
   .float-tel{border-right:2px solid rgba(255,255,255,.3)}
-  .float-tel::after,.float-line::after{display:none}
+  .float-tel::after,.float-mail::after{display:none}
   .float-tel .ic{width:26px;height:26px;font-size:12px;background:#fff;color:var(--brass-deep)}
-  .float-line .ic{width:26px;height:26px;font-size:11px}
-  .float-tel .txt small,.float-line .txt small{font-size:8px;opacity:.9}
+  .float-mail .ic{width:26px;height:26px;font-size:11px}
+  .float-tel .txt small,.float-mail .txt small{font-size:8px;opacity:.9}
   .float-tel .txt b{font-size:13px}
 }
 
@@ -1446,7 +1446,7 @@ a{color:inherit;text-decoration:none;transition:.4s}
 /* Icon circles/badges that had brass bg — use deep bg */
 .tel-icon,.li-icon{background:var(--brass-deep) !important;color:#fff !important;}
 .flow-step .circle,.flow-step div.circle{background:var(--brass-deep) !important;color:#fff !important;}
-.float-tel .ic,.float-line .ic{background:var(--brass-deep) !important;color:#fff !important;}
+.float-tel .ic,.float-mail .ic{background:var(--brass-deep) !important;color:#fff !important;}
 .gi-cat{background:rgba(255,255,255,.92) !important;color:var(--brass-deep) !important;border:1px solid var(--brass-deep)}
 /* Plan numbers/badges that were brass on white */
 .plan-badge,.plan.featured .plan-badge,.plan-ribbon{background:var(--brass-deep) !important;color:#fff !important;}
@@ -1972,11 +1972,11 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
             <li>予算のすり合わせも</li>
           </ul>
         </div>
-        <div class="line-card">
+        <div class="mail-card">
           <div class="li-icon">MAIL</div>
           <h4>メールで、<em>24時間</em>ご相談。</h4>
           <p>下のボタンからメーラーが起動します。日程・ご人数・ご要望をお送りいただければ、担当より折り返しご連絡いたします。</p>
-          <a href="#" data-mail-cta class="line-btn">
+          <a href="#" data-mail-cta class="mail-btn">
             <span class="plus">✉</span>メールで予約のご相談
           </a>
         </div>
@@ -2037,7 +2037,7 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
     <span class="ic">☎</span>
     <span class="txt"><small>TEL · 18:00–26:00</small><b>022-264-1084</b></span>
   </a>
-  <a href="#" data-mail-cta class="float-line" aria-label="メールで貸切予約相談">
+  <a href="#" data-mail-cta class="float-mail" aria-label="メールで貸切予約相談">
     <span class="ic">✉</span>
     <span class="txt"><small>24時間受付・下書き入力済</small>メールで貸切問い合わせ</span>
   </a>
