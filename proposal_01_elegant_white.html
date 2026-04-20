@@ -1814,9 +1814,9 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
           <div class="field">
             <label>プラン</label>
             <div class="pill-group">
-              <label class="pill"><input type="radio" name="plan" value="wedding" checked><span>ウェディング二次会 <small>¥5,000/人</small></span></label>
-              <label class="pill"><input type="radio" name="plan" value="party1"><span>パーティーStandard <small>¥5,000/人</small></span></label>
-              <label class="pill"><input type="radio" name="plan" value="party2"><span>パーティーPremium <small>¥7,000/人</small></span></label>
+              <label class="pill"><input type="radio" name="plan" value="weekday" checked><span>平日・早めスタート <small>¥6,000／おひとり様</small></span></label>
+              <label class="pill"><input type="radio" name="plan" value="weekend_or_night"><span>週末 または 夜スタート <small>¥6,500／おひとり様</small></span></label>
+              <label class="pill"><input type="radio" name="plan" value="weekend_and_night"><span>週末×夜スタート <small>¥7,000／おひとり様</small></span></label>
             </div>
           </div>
           <div class="field">
@@ -1824,28 +1824,27 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
             <div class="pc-picker">
               <div class="pc-display">
                 <div class="pc-big" id="pcBig">
-                  <span class="n" id="pcLabel">60</span><span class="u">名</span>
+                  <span class="n" id="pcLabel">60</span><span class="u">名様</span>
                 </div>
                 <div class="pc-step">
-                  <button type="button" id="pcMinus" aria-label="10名減らす">−</button>
-                  <button type="button" id="pcPlus" aria-label="10名増やす">＋</button>
+                  <button type="button" id="pcMinus" aria-label="1名減らす">−</button>
+                  <button type="button" id="pcPlus" aria-label="1名増やす">＋</button>
                 </div>
               </div>
               <div class="pc-slider">
                 <div class="pc-slider-track"><div class="pc-slider-fill" id="pcFill"></div></div>
-                <input type="range" id="pc" min="50" max="120" step="10" value="60" aria-label="ご利用人数">
+                <input type="range" id="pc" min="10" max="120" step="1" value="60" aria-label="ご利用人数">
               </div>
               <div class="pc-ticks" id="pcTicks">
+                <span data-v="10">10</span>
+                <span data-v="30">30</span>
                 <span data-v="50">50</span>
-                <span data-v="60" class="on">60</span>
                 <span data-v="70">70</span>
-                <span data-v="80">80</span>
                 <span data-v="90">90</span>
-                <span data-v="100">100</span>
                 <span data-v="110">110</span>
                 <span data-v="120">120</span>
               </div>
-              <p class="pc-caption">▲ <b>ツマミをドラッグ</b>／<b>±ボタン</b>／<b>数字をタップ</b> で人数を10名刻みで選択できます。貸切は<b>50名から</b>、最大<b>120名</b>まで。</p>
+              <p class="pc-caption">▲ <b>ツマミをドラッグ</b>／<b>±ボタン</b>／<b>数字をタップ</b> で人数を<b>1名刻み</b>で選択できます。最大<b>120名様</b>まで。<br>※ 50名様未満の場合は<b>最低保証金額</b>でのお見積りとなります。</p>
             </div>
           </div>
           <div class="field">
@@ -1857,12 +1856,12 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
           <div class="field">
             <label>無料貸出設備（明細に反映）</label>
             <div class="pill-group">
-              <label class="pill"><input type="checkbox" name="free" value="mic" checked><span>マイク2本 <small>無料</small></span></label>
+              <label class="pill"><input type="checkbox" name="free" value="mic" checked><span>無線マイク4本 <small>無料</small></span></label>
               <label class="pill"><input type="checkbox" name="free" value="projector"><span>プロジェクター <small>無料</small></span></label>
-              <label class="pill"><input type="checkbox" name="free" value="spotlight"><span>スポットライト <small>無料</small></span></label>
-              <label class="pill"><input type="checkbox" name="free" value="bingo"><span>ビンゴゲーム <small>無料</small></span></label>
-              <label class="pill"><input type="checkbox" name="free" value="knife"><span>ウェディングナイフ <small>無料</small></span></label>
-              <label class="pill"><input type="checkbox" name="free" value="cheki"><span>チェキ本体 <small>無料</small></span></label>
+              <label class="pill"><input type="checkbox" name="free" value="dvd"><span>DVDプレイヤー <small>無料</small></span></label>
+              <label class="pill"><input type="checkbox" name="free" value="pc"><span>PC <small>無料</small></span></label>
+              <label class="pill"><input type="checkbox" name="free" value="audio"><span>音響機材一式 <small>無料</small></span></label>
+              <label class="pill"><input type="checkbox" name="free" value="bingo"><span>ビンゴマシーン <small>無料</small></span></label>
             </div>
           </div>
           <button type="button" id="genBtn" class="est-btn">見積書を生成する　→</button>
@@ -2032,20 +2031,20 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
 <script>
 (function(){
   var PLANS = {
-    wedding: { label:'ウェディング二次会 (9品コース＋2h飲み放題)', price:5000 },
-    party1:  { label:'パーティーStandard (ビュッフェ9品＋2h飲み放題)', price:5000 },
-    party2:  { label:'パーティーPremium (ビュッフェ11品＋2h飲み放題)', price:7000 }
+    weekday:           { label:'平日・早めスタートプラン (ビュッフェ＋飲み放題1h40m)',     price:6000, minGuarantee:300000 },
+    weekend_or_night:  { label:'週末 または 夜スタートプラン (ビュッフェ＋飲み放題1h40m)', price:6500, minGuarantee:325000 },
+    weekend_and_night: { label:'週末×夜スタートプラン (ビュッフェ＋飲み放題1h40m)',        price:7000, minGuarantee:350000 }
   };
   var PAID = {
     piano: { label:'ピアノレンタル', price:10000 }
   };
   var FREE = {
-    mic:       'マイク2本',
+    mic:       '無線マイク 4本',
     projector: 'プロジェクター',
-    spotlight: 'スポットライト',
-    bingo:     'ビンゴゲーム',
-    knife:     'ウェディングナイフ',
-    cheki:     'チェキ本体'
+    dvd:       'DVDプレイヤー',
+    pc:        'PC',
+    audio:     '音響機材一式',
+    bingo:     'ビンゴマシーン'
   };
   function yen(n){ return '¥' + n.toLocaleString('ja-JP'); }
 
@@ -2071,10 +2070,10 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
   }
   pc.addEventListener('input', syncPc);
   pcMinus.addEventListener('click', function(){
-    var v = parseInt(pc.value,10); if(v>parseInt(pc.min,10)){ pc.value = v-10; syncPc(); }
+    var v = parseInt(pc.value,10); if(v>parseInt(pc.min,10)){ pc.value = v-1; syncPc(); }
   });
   pcPlus.addEventListener('click', function(){
-    var v = parseInt(pc.value,10); if(v<parseInt(pc.max,10)){ pc.value = v+10; syncPc(); }
+    var v = parseInt(pc.value,10); if(v<parseInt(pc.max,10)){ pc.value = v+1; syncPc(); }
   });
   Array.prototype.forEach.call(pcTicks.querySelectorAll('span'), function(s){
     s.addEventListener('click', function(){ pc.value = s.dataset.v; syncPc(); });
@@ -2144,8 +2143,11 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
       document.querySelectorAll('input[name=free]:checked'), function(i){return i.value;});
 
     var rows = [];
-    var planSub = plan.price * headcount;
-    rows.push({label:plan.label, unit:plan.price, qty:headcount+'名', sub:planSub, free:false});
+    var rawPlanSub = plan.price * headcount;
+    var minApplied = rawPlanSub < plan.minGuarantee;
+    var planSub = minApplied ? plan.minGuarantee : rawPlanSub;
+    var qtyLabel = headcount + '名様' + (minApplied ? '（最低保証適用）' : '');
+    rows.push({label:plan.label, unit:plan.price, qty:qtyLabel, sub:planSub, free:false, minNote: minApplied ? ('50名様未満のため、最低保証 '+yen(plan.minGuarantee)+' を適用しています。') : null});
     paidKeys.forEach(function(k){
       var o = PAID[k];
       rows.push({label:o.label, unit:o.price, qty:'1式', sub:o.price, free:false});
@@ -2185,6 +2187,7 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
       +    '<span class="lb">御見積金額</span>'
       +    '<span class="big">'+yen(total)+' <small>(税込)</small></span>'
       +  '</div>'
+      +  (minApplied ? '<div style="margin:12px 0 16px;padding:12px 16px;background:#fff7e6;border:1px solid #d8b676;border-radius:6px;font-size:13px;color:#8a6732;line-height:1.6;">※ '+rows[0].minNote+'</div>' : '')
       +  '<table class="quote-table">'
       +    '<thead><tr><th>項目</th><th>単価</th><th>数量</th><th>小計</th></tr></thead>'
       +    '<tbody>'+bodyRows+'</tbody>'
