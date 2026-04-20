@@ -741,9 +741,9 @@ a{color:inherit;text-decoration:none;transition:.4s}
 }
 
 .line-card{
-  background:linear-gradient(165deg,#06c755 0%,#05a847 100%);
+  background:linear-gradient(165deg,#c69553 0%,#8a6732 100%);
   padding:38px 30px;position:relative;overflow:hidden;
-  box-shadow:0 20px 50px -15px rgba(6,199,85,.4);
+  box-shadow:0 20px 50px -15px rgba(138,103,50,.4);
 }
 .line-card::before{
   content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;
@@ -752,7 +752,7 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .line-card .li-icon{
   width:56px;height:56px;border-radius:14px;background:#fff;
   display:flex;align-items:center;justify-content:center;margin-bottom:20px;
-  font-family:var(--serif);font-weight:700;font-size:24px;color:#06c755;
+  font-family:var(--serif);font-weight:700;font-size:20px;color:var(--brass-deep);
   box-shadow:0 8px 20px rgba(0,0,0,.2);position:relative;z-index:2;
 }
 .line-card h4{
@@ -763,15 +763,15 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .line-card p{font-size:13px;color:rgba(255,255,255,.92);line-height:1.9;margin-bottom:24px;position:relative;z-index:2}
 .line-btn{
   display:flex;align-items:center;justify-content:center;gap:12px;
-  width:100%;padding:18px;background:#fff;color:#06c755;
+  width:100%;padding:18px;background:#fff;color:var(--brass-deep);
   font-family:var(--jp);font-weight:700;font-size:14px;letter-spacing:.1em;
   border:none;cursor:pointer;transition:.3s;position:relative;z-index:2;
   box-shadow:0 10px 20px rgba(0,0,0,.15);
 }
-.line-btn:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(0,0,0,.25);color:#05a847}
+.line-btn:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(0,0,0,.25);color:var(--brass)}
 .line-btn .plus{
-  width:22px;height:22px;border-radius:50%;background:#06c755;color:#fff;
-  display:inline-flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;
+  width:22px;height:22px;border-radius:50%;background:var(--brass-deep);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;
 }
 
 /* ===== Estimator ===== */
@@ -1115,22 +1115,22 @@ a{color:inherit;text-decoration:none;transition:.4s}
 .float-line{
   display:inline-flex;align-items:center;gap:12px;
   padding:14px 22px;
-  background:linear-gradient(165deg,#06c755 0%,#05a847 100%);
+  background:linear-gradient(165deg,#c69553 0%,#8a6732 100%);
   color:#fff;font-family:var(--jp);font-weight:700;font-size:14px;letter-spacing:.06em;
   border-radius:50px;
-  box-shadow:0 14px 34px -10px rgba(6,199,85,.55),0 0 0 1px rgba(255,255,255,.1);
+  box-shadow:0 14px 34px -10px rgba(138,103,50,.55),0 0 0 1px rgba(255,255,255,.1);
   transition:.3s;position:relative;
 }
 .float-line::after{
   content:"";position:absolute;inset:0;border-radius:50px;
-  border:2px solid #06c755;animation:floatPulse 2.4s ease-out infinite;pointer-events:none;
+  border:2px solid #c69553;animation:floatPulse 2.4s ease-out infinite;pointer-events:none;
 }
 @keyframes floatPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.15);opacity:0}}
-.float-line:hover{transform:translateY(-3px);box-shadow:0 20px 50px -10px rgba(6,199,85,.75)}
+.float-line:hover{transform:translateY(-3px);box-shadow:0 20px 50px -10px rgba(138,103,50,.75)}
 .float-line .ic{
-  width:30px;height:30px;background:#fff;color:#06c755;border-radius:8px;
+  width:30px;height:30px;background:#fff;color:var(--brass-deep);border-radius:8px;
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--serif);font-weight:700;font-size:13px;flex-shrink:0;
+  font-family:var(--serif);font-weight:700;font-size:14px;flex-shrink:0;
 }
 .float-line .txt{display:flex;flex-direction:column;line-height:1.2;text-align:left}
 .float-line .txt small{font-size:9px;letter-spacing:.15em;opacity:.85;font-weight:500;margin-bottom:2px}
@@ -1783,7 +1783,7 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
         <div class="flow-step">
           <div class="circle">01</div>
           <h5>お問い合わせ</h5>
-          <p>LINE・フォーム・<br>お電話よりご連絡。</p>
+          <p>メール・フォーム・<br>お電話よりご連絡。</p>
         </div>
         <div class="flow-step">
           <div class="circle">02</div>
@@ -1850,8 +1850,23 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
           <div class="field">
             <label>有料オプション</label>
             <div class="pill-group">
-              <label class="pill"><input type="checkbox" name="paid" value="piano"><span>ピアノ <small>¥10,000</small></span></label>
+              <label class="pill"><input type="checkbox" name="paid" value="piano"><span>ピアノレンタル <small>¥10,000</small></span></label>
+              <label class="pill"><input type="checkbox" name="paid" value="extend"><span>30分延長 <small>¥500／おひとり様</small></span></label>
             </div>
+          </div>
+          <div class="field">
+            <label>メニュー・ドリンク アップグレード</label>
+            <div class="pc-display" style="max-width:360px">
+              <div class="pc-big">
+                <span class="n" id="ugLabel">0</span><span class="u">段階</span>
+              </div>
+              <div class="pc-step">
+                <button type="button" id="ugMinus" aria-label="1段階減らす">−</button>
+                <button type="button" id="ugPlus" aria-label="1段階増やす">＋</button>
+              </div>
+              <input type="hidden" id="upgrade" value="0">
+            </div>
+            <p class="pc-caption">おひとり様あたり<b>1,000円単位</b>で料理・ドリンクのランクを上げられます。現在の設定：<b id="ugYenLabel">追加なし</b></p>
           </div>
           <div class="field">
             <label>無料貸出設備（明細に反映）</label>
@@ -1958,11 +1973,11 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
           </ul>
         </div>
         <div class="line-card">
-          <div class="li-icon">LINE</div>
-          <h4>LINEで、最短<em>5分</em>相談。</h4>
-          <p>友だち追加いただくと、専属コンシェルジュが日程・見積・ご質問に直接お応えします。</p>
-          <a href="https://line.me/R/ti/p/@retro-backpage" target="_blank" rel="noopener" class="line-btn">
-            <span class="plus">+</span>友だち追加して予約相談
+          <div class="li-icon">MAIL</div>
+          <h4>メールで、<em>24時間</em>ご相談。</h4>
+          <p>下のボタンからメーラーが起動します。日程・ご人数・ご要望をお送りいただければ、担当より折り返しご連絡いたします。</p>
+          <a href="#" data-mail-cta class="line-btn">
+            <span class="plus">✉</span>メールで予約のご相談
           </a>
         </div>
       </aside>
@@ -1973,7 +1988,7 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
 <section class="info">
   <p class="label">— Reservation —</p>
   <h3>Booking &amp; <i>Inquiry.</i></h3>
-  <p>貸切のご相談はLINE・お電話・お問い合わせフォームで承ります。日程・人数・ご予算・ご要望をお聞かせいただければ、プランをご提案いたします。どうぞお気軽にご相談ください。</p>
+  <p>貸切のご相談はお電話・メール・お問い合わせフォームで承ります。日程・ご人数・ご予算・ご要望をお聞かせいただければ、プランをご提案いたします。どうぞお気軽にご相談ください。</p>
 
   <div class="phone-big">
     <div class="plabel">— Direct Call —</div>
@@ -1982,7 +1997,7 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
   </div>
 
   <div class="cta-group">
-    <a href="https://line.me/R/ti/p/@retro-backpage" target="_blank" rel="noopener" class="btn primary">LINEで相談<span class="arrow">→</span></a>
+    <a href="#" data-mail-cta class="btn primary">メールで相談<span class="arrow">→</span></a>
     <a href="contact.html" class="btn">Contact Form<span class="arrow">→</span></a>
   </div>
 </section>
@@ -2022,9 +2037,9 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
     <span class="ic">☎</span>
     <span class="txt"><small>TEL · 18:00–26:00</small><b>022-264-1084</b></span>
   </a>
-  <a href="https://line.me/R/ti/p/@retro-backpage" target="_blank" rel="noopener" class="float-line" aria-label="LINEで貸切予約相談">
-    <span class="ic">L</span>
-    <span class="txt"><small>最短5分で相談</small>LINEで貸切問い合わせ</span>
+  <a href="#" data-mail-cta class="float-line" aria-label="メールで貸切予約相談">
+    <span class="ic">✉</span>
+    <span class="txt"><small>24時間受付・下書き入力済</small>メールで貸切問い合わせ</span>
   </a>
 </div>
 
@@ -2036,7 +2051,8 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
     weekend_and_night: { label:'週末×夜スタートプラン (ビュッフェ＋飲み放題1h40m)',        price:7000, minGuarantee:350000 }
   };
   var PAID = {
-    piano: { label:'ピアノレンタル', price:10000 }
+    piano:  { label:'ピアノレンタル', price:10000, perPerson:false },
+    extend: { label:'30分延長',       price:500,   perPerson:true  }
   };
   var FREE = {
     mic:       '無線マイク 4本',
@@ -2079,6 +2095,54 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
     s.addEventListener('click', function(){ pc.value = s.dataset.v; syncPc(); });
   });
   syncPc();
+
+  // ===== Menu upgrade controls =====
+  var ug = document.getElementById('upgrade');
+  var ugLabel = document.getElementById('ugLabel');
+  var ugYenLabel = document.getElementById('ugYenLabel');
+  var ugMinus = document.getElementById('ugMinus');
+  var ugPlus = document.getElementById('ugPlus');
+  function syncUg(){
+    var v = parseInt(ug.value,10) || 0;
+    ugLabel.textContent = v;
+    ugYenLabel.textContent = v === 0 ? '追加なし' : '+¥' + (v*1000).toLocaleString() + ' ／ おひとり様';
+    ugMinus.disabled = v <= 0;
+    ugPlus.disabled = v >= 10;
+  }
+  ugMinus.addEventListener('click', function(){
+    var v = parseInt(ug.value,10) || 0; if (v > 0) { ug.value = v-1; syncUg(); }
+  });
+  ugPlus.addEventListener('click', function(){
+    var v = parseInt(ug.value,10) || 0; if (v < 10) { ug.value = v+1; syncUg(); }
+  });
+  syncUg();
+
+  // ===== Mail CTA URL (pre-filled subject & body) =====
+  var MAIL_TO = 'info@retro-backpage.com'; // TODO: 先方の正式メールアドレスに差し替え
+  var MAIL_SUBJECT = '【貸切予約のご相談】';
+  var MAIL_BODY = [
+    '【貸切予約のご相談】',
+    '',
+    'ご氏名：',
+    'お電話番号：',
+    '',
+    'ご希望日：',
+    'ご希望開始時間（17:00〜 / 30分刻み）：',
+    'ご人数：     名様',
+    '',
+    'ご希望プラン（いずれかに○）：',
+    '  □ 平日・早めスタート（¥6,000／おひとり様〜）',
+    '  □ 週末 または 夜スタート（¥6,500／おひとり様〜）',
+    '  □ 週末×夜スタート（¥7,000／おひとり様〜）',
+    '',
+    'ご要望・ご質問：',
+    '',
+    ''
+  ].join('\r\n');
+  var MAIL_URL = 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent(MAIL_SUBJECT) + '&body=' + encodeURIComponent(MAIL_BODY);
+  Array.prototype.forEach.call(document.querySelectorAll('[data-mail-cta]'), function(a){
+    a.setAttribute('href', MAIL_URL);
+  });
 
   // ===== Gallery filter =====
   var filters = document.querySelectorAll('.gf');
@@ -2150,8 +2214,20 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
     rows.push({label:plan.label, unit:plan.price, qty:qtyLabel, sub:planSub, free:false, minNote: minApplied ? ('50名様未満のため、最低保証 '+yen(plan.minGuarantee)+' を適用しています。') : null});
     paidKeys.forEach(function(k){
       var o = PAID[k];
-      rows.push({label:o.label, unit:o.price, qty:'1式', sub:o.price, free:false});
+      if (o.perPerson) {
+        var sub = o.price * headcount;
+        rows.push({label:o.label+'（¥'+o.price.toLocaleString()+' ／ おひとり様）', unit:o.price, qty:headcount+'名様', sub:sub, free:false});
+      } else {
+        rows.push({label:o.label, unit:o.price, qty:'1式', sub:o.price, free:false});
+      }
     });
+
+    var ugLevel = parseInt(document.getElementById('upgrade').value,10) || 0;
+    if (ugLevel > 0) {
+      var ugUnit = ugLevel * 1000;
+      var ugSub = ugUnit * headcount;
+      rows.push({label:'メニュー・ドリンク アップグレード（¥'+ugUnit.toLocaleString()+' ／ おひとり様）', unit:ugUnit, qty:headcount+'名様', sub:ugSub, free:false});
+    }
     freeKeys.forEach(function(k){
       rows.push({label:FREE[k]+' (無料貸出)', unit:0, qty:'1式', sub:0, free:true});
     });
@@ -2199,7 +2275,7 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
       +  '</table>'
       +  '<div class="quote-footer">'
       +    '<p class="note">r·e·t·r·o Back Page ／ 〒980-0803 仙台市青葉区国分町3-3-1 定禅寺ヒルズ8F ／ TEL 022-264-1084<br>'
-      +    '<b>※ 本見積はシミュレーターによる概算です。</b>社内ご検討・稟議資料にそのままご活用ください。正式なお見積りはLINEまたはお問い合わせフォームよりご請求ください。ご利用時間は2時間／延長・メニュー変更は別途ご相談。</p>'
+      +    '<b>※ 本見積はシミュレーターによる概算です。</b>社内ご検討・稟議資料にそのままご活用ください。正式なお見積りはお電話またはメールよりご請求ください。ご利用時間は2時間（延長・アップグレードは本見積に反映可）。</p>'
       +    '<button type="button" class="print-btn" onclick="window.print()">印刷 / PDFで保存　→</button>'
       +  '</div>'
       +'</div>';
