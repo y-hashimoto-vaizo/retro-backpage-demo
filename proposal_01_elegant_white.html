@@ -453,6 +453,65 @@ a{color:inherit;text-decoration:none;transition:.4s}
   .plan-price .num{font-size:48px}
 }
 
+/* Plan scene / minimum guarantee / match chips / hint */
+.plan-scene{
+  font-size:12.5px;color:var(--ink-sub);margin:-6px 0 16px;
+  letter-spacing:.03em;line-height:1.8;min-height:34px;
+}
+.plan-minguarantee{
+  font-size:11.5px;color:var(--ink-sub);letter-spacing:.06em;
+  margin:-8px 0 14px;padding-bottom:14px;
+  border-bottom:1px solid var(--line-soft);
+  display:flex;align-items:baseline;gap:10px;
+}
+.plan-minguarantee small{font-size:11px;letter-spacing:.12em;color:var(--ink-dim);font-weight:500}
+.plan-minguarantee b{font-family:var(--serif);font-size:18px;color:var(--brass-deep);letter-spacing:.02em;font-weight:600}
+.plan-match{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 14px}
+.plan-match .chip{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:6px 10px;font-size:11px;letter-spacing:.04em;
+  border:1px solid var(--line);border-radius:4px;
+  background:#fafafa;color:var(--ink-dim);font-weight:500;
+}
+.plan-match .chip::before{content:"";width:6px;height:6px;border-radius:50%;background:#d6ccbb}
+.plan-match .chip.on{background:#fcf3e0;border-color:var(--brass);color:var(--brass-deep);font-weight:600}
+.plan-match .chip.on::before{background:var(--brass)}
+.plan-hint{
+  font-size:11.5px;color:var(--ink-dim);letter-spacing:.04em;
+  margin:0 0 16px;line-height:1.8;padding:8px 12px;
+  background:var(--bg-2);border-radius:4px;
+}
+
+/* Plan common features (below cards) */
+.plan-common{
+  margin-top:42px;background:var(--bg-2);border:1px solid var(--line-soft);
+  border-radius:10px;padding:28px 32px;
+}
+.plan-common-head{
+  font-family:var(--jp);font-size:14px;letter-spacing:.12em;
+  color:var(--ink);margin:0 0 18px;padding-bottom:12px;
+  border-bottom:1px solid var(--line-soft);font-weight:600;
+}
+.plan-common-head small{font-size:10px;letter-spacing:.2em;color:var(--brass-deep);margin-left:8px;font-weight:500}
+.plan-common-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px 24px;
+  font-size:13px;color:var(--ink-sub);letter-spacing:.02em;
+}
+.plan-common-grid span{position:relative;padding-left:18px;line-height:1.8}
+.plan-common-grid span::before{
+  content:"";position:absolute;left:0;top:9px;
+  width:6px;height:6px;background:var(--brass);border-radius:50%;
+}
+@media(max-width:900px){.plan-common-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.plan-common-grid{grid-template-columns:1fr}}
+
+.plan-notes{
+  margin-top:22px;font-size:12.5px;color:var(--ink-sub);
+  line-height:2;letter-spacing:.03em;padding:0 8px;
+}
+.plan-notes p{margin:0 0 4px}
+.plan-notes b{color:var(--ink);font-weight:600}
+
 /* ===== Gallery ===== */
 .gallery{background:var(--bg-2);position:relative;overflow:hidden}
 .gallery::before{
@@ -1693,8 +1752,14 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
       </div>
       <div class="plan-body">
         <h4 class="plan-title">平日・早めスタートプラン</h4>
+        <p class="plan-scene">平日の会社の懇親会・歓送迎会に。17:00から19:30スタートまで。</p>
         <div class="plan-price">
           <span class="yen">¥</span><span class="num">6,000</span><span class="unit">／ おひとり様〜（税込）</span>
+        </div>
+        <p class="plan-minguarantee"><small>最低保証</small><b>¥300,000</b></p>
+        <div class="plan-match">
+          <span class="chip on">月〜木曜</span>
+          <span class="chip on">〜19:30 スタート</span>
         </div>
         <div class="plan-meta">
           <div><b>50+</b><span>名様</span></div>
@@ -1704,9 +1769,7 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
         <ul class="plan-includes">
           <li>お料理 ビュッフェスタイル</li>
           <li>飲み放題（1時間40分）</li>
-          <li>最低保証 <b>¥300,000</b></li>
-          <li>無線マイク4本・プロジェクター等 無料貸出</li>
-          <li>月〜木曜 × 19:30までのスタート</li>
+          <li>店内貸切・無料貸出設備一式</li>
         </ul>
         <a href="#reservation" class="plan-btn">このプランでご相談<span class="arr">→</span></a>
       </div>
@@ -1721,9 +1784,18 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
       </div>
       <div class="plan-body">
         <h4 class="plan-title">週末 または 夜スタートプラン</h4>
+        <p class="plan-scene">金・土のご利用、または平日の20時以降スタート。二次会やパーティーに。</p>
         <div class="plan-price">
           <span class="yen">¥</span><span class="num">6,500</span><span class="unit">／ おひとり様〜（税込）</span>
         </div>
+        <p class="plan-minguarantee"><small>最低保証</small><b>¥325,000</b></p>
+        <div class="plan-match">
+          <span class="chip">月〜木曜</span>
+          <span class="chip on">金・土曜</span>
+          <span class="chip">〜19:30</span>
+          <span class="chip on">20:00以降</span>
+        </div>
+        <p class="plan-hint">※ 金・土曜、または20:00以降スタート（どちらか1つでも当てはまる場合）</p>
         <div class="plan-meta">
           <div><b>50+</b><span>名様</span></div>
           <div><b>2h</b><span>時間</span></div>
@@ -1732,9 +1804,7 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
         <ul class="plan-includes">
           <li>お料理 ビュッフェスタイル</li>
           <li>飲み放題（1時間40分）</li>
-          <li>最低保証 <b>¥325,000</b></li>
-          <li>無線マイク4本・プロジェクター等 無料貸出</li>
-          <li>金・土曜、または20:00以降スタートの方へ</li>
+          <li>店内貸切・無料貸出設備一式</li>
         </ul>
         <a href="#reservation" class="plan-btn">このプランでご相談<span class="arr">→</span></a>
       </div>
@@ -1748,9 +1818,16 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
       </div>
       <div class="plan-body">
         <h4 class="plan-title">週末×夜スタートプラン</h4>
+        <p class="plan-scene">金・土曜の20時以降スタート。結婚式二次会・ライブパーティーに。</p>
         <div class="plan-price">
           <span class="yen">¥</span><span class="num">7,000</span><span class="unit">／ おひとり様〜（税込）</span>
         </div>
+        <p class="plan-minguarantee"><small>最低保証</small><b>¥350,000</b></p>
+        <div class="plan-match">
+          <span class="chip on">金・土曜</span>
+          <span class="chip on">20:00以降 スタート</span>
+        </div>
+        <p class="plan-hint">※ 金・土曜 かつ 20:00以降スタート（両方に当てはまる場合）</p>
         <div class="plan-meta">
           <div><b>50+</b><span>名様</span></div>
           <div><b>2h</b><span>時間</span></div>
@@ -1759,13 +1836,34 @@ body.retro-bp-white-edition .brass-text,body .hero h1,
         <ul class="plan-includes">
           <li>お料理 ビュッフェスタイル</li>
           <li>飲み放題（1時間40分）</li>
-          <li>最低保証 <b>¥350,000</b></li>
-          <li>無線マイク4本・プロジェクター等 無料貸出</li>
-          <li>金・土曜 × 20:00以降スタートの方へ</li>
+          <li>店内貸切・無料貸出設備一式</li>
         </ul>
         <a href="#reservation" class="plan-btn">このプランでご相談<span class="arr">→</span></a>
       </div>
     </article>
+  </div>
+
+  <div class="plan-common">
+    <h4 class="plan-common-head">全プラン共通で含まれるもの <small>ALL PLANS INCLUDE</small></h4>
+    <div class="plan-common-grid">
+      <span>ビュッフェスタイルのお料理</span>
+      <span>飲み放題（1時間40分）</span>
+      <span>無線マイク 4本</span>
+      <span>プロジェクター</span>
+      <span>DVDプレイヤー</span>
+      <span>PC</span>
+      <span>音響機材一式（スピーカー等）</span>
+      <span>ビンゴマシーン</span>
+      <span>店内貸切（50名様〜120名様）</span>
+    </div>
+  </div>
+
+  <div class="plan-notes">
+    <p><b>開始時間：</b>17:00から30分刻みでお選びいただけます。15分単位でのご調整もお気軽にご相談ください。</p>
+    <p><b>延長：</b>30分延長は、おひとり様 +¥500 で承ります。</p>
+    <p><b>アップグレード：</b>お料理・ドリンクは、おひとり様 1,000円単位 でランクアップできます（ご要望に応じてご提案します）。</p>
+    <p><b>最低保証に満たない場合：</b>最低保証金額でそのまま貸切、またはフロア貸切（店舗の半分）への切替も可能です。</p>
+    <p><b>お支払い：</b>現金、または請求書発行でのお振り込みにて承ります。</p>
   </div>
 </section>
 
